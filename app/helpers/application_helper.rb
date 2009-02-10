@@ -5,7 +5,7 @@ module ApplicationHelper
   
   def menu
     home     = menu_element("Home",   home_path)
-    categories = menu_element("Services", categories_path)
+    categories = menu_element("SkillBank", categories_path)
     people   = menu_element("People", people_path)
     if Forum.count == 1
       forum = menu_element("Forum", forum_path(Forum.find(:first)))
@@ -14,16 +14,17 @@ module ApplicationHelper
     end
     resources = menu_element("Resources", "http://docs.insoshi.com/")
     if logged_in? and not admin_view?
-      profile  = menu_element("Profile",  person_path(current_person))
+      profile  = menu_element("Home",  person_path(current_person))
+      offers = menu_element("Offers", offers_path)
       requests = menu_element("Requests", reqs_path)
-      messages = menu_element("Messages", messages_path)
+      messages = menu_element("Inbox", messages_path)
 #      blog     = menu_element("Blog",     blog_path(current_person.blog))
       photos   = menu_element("Photos",   photos_path)
 #      contacts = menu_element("Contacts",
 #                              person_connections_path(current_person))
 #      links = [home, profile, contacts, messages, blog, people, forum]
       events   = menu_element("Events", events_path)
-      links = [home, profile, categories, requests, people, messages, forum]
+      links = [ profile, people, categories, offers, requests, messages, forum]
       # TODO: remove 'unless production?' once events are ready.
       links.push(events) #unless production?
       

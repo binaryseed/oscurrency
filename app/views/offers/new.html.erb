@@ -1,11 +1,11 @@
 <%= render :partial => 'jscript', :locals => { :jscript_file_name => 'req_form' } %>
 <%- column_div :type => :primary do -%>
 
-<h2>New request</h2>
+<h2>New Offer</h2>
 
 <%= error_messages_for :req %>
 
-<% form_for(@req) do |f| %>
+<% form_for(@req, :url => "/offers", :html => {:method => :post, :class => "new_req", :id => "new_req"} ) do |f| %>
   <div class="form_row">
     <%= f.label 'Title' %>
     <%= f.text_field :name %>
@@ -33,6 +33,6 @@
 <%- end -%>
 
 <%- column_div :type => :secondary do -%>
-<%= render :partial => 'searches/box', :locals => {:search_type => "Requests",:search_model=>"Req"} %>
+  <%= render :partial => 'searches/box', :locals => {:search_type => "Offers",:search_model=>"Req"} %>
   <%= render :partial => 'shared/minifeed' %>
 <%- end -%>

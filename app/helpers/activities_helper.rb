@@ -54,10 +54,16 @@ module ActivitiesHelper
         #{event_link(event.title, event)}.) 
     when "Req"
       req = activity.item
-      %(#{person_link(person)} has created a new request: #{req_link(req.name, req)}.)
+      
+      if req.isoffer
+        %(#{person_link(person)} has posted a new offer: #{offer_link(req.name, req)}.)
+      else
+        %(#{person_link(person)} has made a new request: #{req_link(req.name, req)}.)
+      end
+      
     when "Exchange"
       exchange = activity.item
-      %(#{person_link(person)} earned #{exchange.amount} hours for #{req_link(exchange.req.name,exchange.req)}.)
+      %(#{person_link(person)} earned #{exchange.amount} Marbles for #{req_link(exchange.req.name,exchange.req)}.)
     else
       raise "Invalid activity type #{activity_type(activity).inspect}"
     end
@@ -112,10 +118,16 @@ module ActivitiesHelper
       %(#{person_link(person)} is attending #{someones(event.person, person)} #{event_link("event", event)}.)
     when "Req"
       req = activity.item
-      %(#{person_link(person)} has created a new request: #{req_link(req.name, req)}.)
+      
+      if req.isoffer
+        %(#{person_link(person)} has posted a new offer: #{offer_link(req.name, req)}.)
+      else
+        %(#{person_link(person)} has made a new request: #{req_link(req.name, req)}.)
+      end
+
     when "Exchange"
       exchange = activity.item
-      %(#{person_link(person)} earned #{exchange.amount} hours for #{req_link(exchange.req.name,exchange.req)}.)
+      %(#{person_link(person)} earned #{exchange.amount} Marbles for #{req_link(exchange.req.name,exchange.req)}.)
     else
       raise "Invalid activity type #{activity_type(activity).inspect}"
     end
@@ -189,6 +201,10 @@ module ActivitiesHelper
     link_to(text, event_path(event))
   end
 
+  def offer_link(text, req)
+    link_to(text, offer_path(req))
+  end
+  
   def req_link(text, req)
     link_to(text, req_path(req))
   end

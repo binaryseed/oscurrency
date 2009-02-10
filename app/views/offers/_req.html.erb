@@ -2,23 +2,21 @@
   <a name="req_<%= req.id %>"></a>
   <div class="profile-image">
     <%= image_link req.person, :image => :thumbnail %>
-    <%= image_tag "icons/new.gif", :class => "icon", :alt => "Request" %>
+    <%= image_tag "icons/new.gif", :class => "icon", :alt => "Offer" %>
   </div>
   <% if req.has_accepted_bid? %>
     <%= render :partial => "shared/accepted_bid", :object => req.accepted_bid %>
   <% end -%>
   <p>
-	
-	<% if req.isoffer %>
-		<%= "<em>Offer:</em> " if defined? show_type %>
-		<%= link_to h(req.name), {:controller =>"offers",:action =>req.id}, :class => "show-follow" %>
-	<% else %>
-		<%= "<em>Request:</em> " if defined? show_type %>
-		<%= link_to h(req.name), req, :class => "show-follow" %>
-	<% end %>
-	
-	
-	(<%= h req.estimated_hours %> Marbles)
+  <%= 
+		# link_to h(req.name), req, :class => "show-follow" 
+		link_to h(req.name), {:controller =>"offers",:action =>req.id}, :class => "show-follow" 
+		
+		
+
+%>
+
+ (<%= h req.estimated_hours %> Marbles)
     Due: <%= relative_time_ago_in_words(req.due_date) %>
   </p>
   <p class="meta">
@@ -41,7 +39,7 @@
     | <%= link_to "Delete", req, :confirm => 'Are you sure?', :method => :delete unless (req.has_commitment? || req.has_approved?) %>
     <% end -%>
     <br>
-    <% if false && !current_person.address.nil? && !req.person.address.nil? && !current_person?(req.person) -%>
+    <% if !current_person.address.nil? && !req.person.address.nil? && !current_person?(req.person) -%>
       <%= number_with_precision(req.person.address.distance_to(current_person.address)).to_s %> miles away
     <% end -%>
   </p>

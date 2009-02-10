@@ -1,0 +1,5 @@
+<% if logged_in? -%>
+  <div class="status-btn">
+    <input type="button" name="update" value="Create Offer" id="update-submit" class="round-btn" onclick="document.location='<%= new_offer_path %>';" />
+  </div>
+<% end -%>

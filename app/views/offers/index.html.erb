@@ -1,8 +1,8 @@
 <%- column_div :type => :primary do -%>
-<h2>Requests</h2>
+<h2>Offers</h2>
 
 <%- if @reqs.empty? -%>
-    <h3 class="blankslate">No requests (yet!)</h3>
+    <h3 class="blankslate">No offers (yet!)</h3>
 <%- else -%>
   <ul class="list full">
     <%= render :partial => 'req', :collection => @reqs %>
@@ -11,7 +11,7 @@
 <%- end -%>
 
 <%- column_div :type => :secondary do -%>
-  <%= render :partial => 'shared/add_req_button' %>
-  <%= render :partial => 'searches/box', :locals => {:search_type => "Requests",:search_model=>"Req"} %>
+  <%= render :partial => 'shared/add_offer_button' %>
+  <%= render :partial => 'searches/box', :locals => {:search_type =>"Offers",:search_model=>"Req"} %>
   <%= render :partial => 'shared/minifeed' %>
 <%- end -%>

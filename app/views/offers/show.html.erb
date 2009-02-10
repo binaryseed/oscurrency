@@ -1,16 +1,6 @@
 <%= render :partial => 'jscript', :locals => { :jscript_file_name => 'bid_form' } %>
 <% column_div :type => :primary do -%>
-
-
-
-<% if @req.isoffer %>
-	<h2>Offer</h2>
-<% else %>
-	<h2>Request</h2>
-<% end %>
-
-
-
+  <h2>Offer</h2>
   <ul class="list full">
     <%= render :partial => @req %>
   </ul>
@@ -47,15 +37,8 @@
 <%- end -%>
 
 <%- column_div :type => :secondary do -%>
-
-	<% if @req.isoffer %>
-  		<%= render :partial => 'shared/add_offer_button' %>
-	  <%= render :partial => 'searches/box', :locals => {:search_type => "Offers",:search_model=>"Req"} %>
-	<% else %>
-	  	<%= render :partial => 'shared/add_req_button' %>
-	  <%= render :partial => 'searches/box', :locals => {:search_type => "Requests",:search_model=>"Req"} %>
-	<% end %>
-
-
+	<% %>
+  <%= render :partial => 'shared/add_offer_button' %>
+  <%= render :partial => 'searches/box', :locals => {:search_type => "Offers",:search_model=>"Req"} %>
   <%= render :partial => 'shared/minifeed' %>
 <%- end -%>

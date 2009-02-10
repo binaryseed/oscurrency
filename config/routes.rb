@@ -6,6 +6,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :reqs do |req|
     req.resources :bids
   end
+  
+  #add offers routing
+  map.resources :offers do |offer|
+    offer.resources :bids
+  end
 
   map.resources :categories
 

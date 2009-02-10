@@ -5,15 +5,16 @@ body {
 }
 #header-wrap {
   /* background: #009908; */
-  background: #009908 url('/images/aten_header_background.png');
+  background: #009908 url('/images/cec_header_background.png') no-repeat top center;
   float: left;
   width: 100%;
 }
 #wrap, #header, #footer {
   margin: 0 auto;
   text-align: left;
-  width: 744px;
+  width: 844px;
 }
+a:active, a:focus {outline: none;text-decoration:underline;}
 
 /*
 #wrap{
@@ -25,7 +26,7 @@ body {
 */
 
 #content {
-  width: 744px;
+  width: 844px;
   float: left;
 }
 
@@ -41,6 +42,7 @@ div#atenroot{
 .status-btn {
   padding: 10px 10px 0px 0px;
   text-align: center;
+  margin-top:1.5em;
 }
 
 input.update-button {background-color:#f2f2f2;color:#FFF;font-size:1em;font-weight:bold;border: 1px solid black;cursor:pointer;margin-top:10px;padding:3px;float:right;margin-right:12px}
@@ -50,11 +52,11 @@ div.status-btn input.disabled, div.status-btn input.disabled:hover { background:
 
 .col1 {
   float: left;
-  width: 490px;
+  width: 550px;
 }
 .col2 {
   float: right;
-  width: 240px;
+  width: 280px;
 }
 .single-col .col1 {
   margin: 0 210px;
@@ -64,7 +66,7 @@ div.status-btn input.disabled, div.status-btn input.disabled:hover { background:
 /* Header */
 #header {
   position: relative;
-  height: 80px;
+  height: 120px;
 }
 
 #header h1 {
@@ -77,8 +79,8 @@ div.status-btn input.disabled, div.status-btn input.disabled:hover { background:
 
 /* Header-nav */
 #nav {
-  margin: 44px 0 0 0;
-  width: 576px;
+  margin: 84px 0 0 0;
+/*  width: 700px;*/
   float: right;
 }
 #nav li {
@@ -91,6 +93,7 @@ div.status-btn input.disabled, div.status-btn input.disabled:hover { background:
   padding: 0;
   text-align: center;
   width: 70px;
+/*  padding:0px 11px;*/
 }
 #nav li a {
   color: #fff;
@@ -142,17 +145,18 @@ div.status-btn input.disabled, div.status-btn input.disabled:hover { background:
   clear: both;
   margin-top: 48px;
   padding: 24px 0;
-  width: 744px;
+  width: 844px;
   
 }
 
 /* Welcome message */
 p.welcome {
   position: absolute;
-  right: 0;
+  right: 0px;
   text-align: right;
-  top: 12px;
+  top: 58px;
 }
+p.welcome br { display:none; }
 
 
 
@@ -312,17 +316,15 @@ form#blogpost #post_title, form#blogpost #post_body {
 
 #message-nav {
   background: url(/images/silver-grad.jpg) bottom repeat-x;
-  border-bottom: 1px solid #ccc;
   float: left;
   height: 24px;
-  margin-top: -24px;
   position: relative;
   width: 100%;
 }
 #message-nav li {
   background: none;
   float: left;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 24px;
   list-style-type: none;
   margin: 0;
@@ -348,8 +350,8 @@ form#blogpost #post_title, form#blogpost #post_body {
 }
 #message-nav li a {
   color: #333;
+  font-weight:bold;
   display: block;
-  font-weight: normal;
   height: 100%;
 }
 .message .tools {
@@ -389,3 +391,68 @@ div.desc-message{
 	width:500px;	
 	margin-bottom:20px;
 }
+
+
+
+
+
+
+ul.categories
+{
+    margin-left:135px;
+}
+ul.categories ul
+{
+    margin-bottom:0px;
+}
+ul.categories li
+{
+    border:1px solid #ddd;
+    padding:5px;
+    width:497px;
+    margin:0px;
+    margin-left:20px;
+    background: white url("/images/silver-grad-inv.jpg") repeat-x top left;
+    font-size:16px;
+    color:#333;
+}
+ul.categories a
+{
+    color:#333;
+}
+ul.categories li ul li.selected
+{
+    background:white;
+}
+ul.categories li.selected a
+{
+    text-decoration:underline;
+}
+ul.categories li ul li
+{
+    border:0px;
+    width:440px;
+    list-style-type:disc;
+    background:white;
+}
+
+
+
+
+/* label for activity type, show in categories/xx   */
+.req em
+{
+    color:#009908;
+    font-style:normal;
+    font-weight:bold;
+    font-family:Georgia,Times,serif;
+}
+
+
+#nav .n-requests, #nav .n-people
+{
+    padding-right:30px;
+}
+
+
+

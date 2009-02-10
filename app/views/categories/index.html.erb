@@ -7,7 +7,7 @@
 <%= javascript_include_tag 'cat_accordion' %>
 <% end -%>  
 <%- column_div :type => :primary do -%>
-<h2>Services</h2>
+<h2>SkillBank Categories</h2>
 
 <%- if @top_level_categories.empty? -%>
     <h3 class="blankslate">No categories (yet!)</h3>
@@ -20,6 +20,7 @@
 <%- end -%>
 
 <%- column_div :type => :secondary do -%>
-  <%= render :partial => 'searches/box' %>
-  <%= render :partial => 'shared/add_category_button' %>
+	<%= render :partial => 'shared/add_category_button' %>
+  <%= # render :partial => 'searches/box' 
+%>
 <%- end -%>

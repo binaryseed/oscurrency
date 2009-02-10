@@ -10,6 +10,6 @@
 <%- end -%>
 
 <%- column_div :type => :secondary do -%>
-  <%= render :partial => 'searches/box' %>
+  <%= render :partial => 'searches/box', :locals => {:search_type => "People",:search_model=>"Person"} %>
   <%= render :partial => 'shared/minifeed' %>
 <%- end -%>
