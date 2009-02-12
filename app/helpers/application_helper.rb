@@ -136,7 +136,7 @@ module ApplicationHelper
   def account_link(person, options = {})
     path = person_path(person) # XXX link to transactions
     img = image_tag("icons/bargraph.gif")
-    action = "Balance: #{person.account.balance} hours"
+    action = "Balance: #{person.account.balance} marbles"
     opts = {}
     str = link_to(img,path, opts)
     str << "&nbsp;"
@@ -147,7 +147,7 @@ module ApplicationHelper
     img = image_tag("icons/switch.gif")
     path = new_person_exchange_path(person)
     opts = {}
-    action = "Transfer hours"
+    action = "Transfer marbles"
     str = link_to(img,path,opts)
     str << "&nbsp;"
     str << link_to_unless_current(action, path, opts)
