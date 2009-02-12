@@ -456,3 +456,17 @@ ul.categories li ul li
 
 
 
+.bid p.description
+{
+    color:#333;
+    margin-top:5px;
+    padding-left:10px;
+    border-left:1px solid #ddd;
+}
+
+li.req ul
+{
+    margin-left:102px;
+}
+
+

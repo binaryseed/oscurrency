@@ -11,10 +11,7 @@
   <%= 
 		# link_to h(req.name), req, :class => "show-follow" 
 		link_to h(req.name), {:controller =>"offers",:action =>req.id}, :class => "show-follow" 
-		
-		
-
-%>
+  %>
 
  (<%= h req.estimated_hours %> Marbles)
     Due: <%= relative_time_ago_in_words(req.due_date) %>
@@ -23,7 +20,11 @@
     <%= h req.categories[0].long_name unless req.categories.empty? %>
   </p>
   <p>
-    <%= h req.description %>
+    <% if short %>
+	      <%= display req.short_description %>
+	<% else %>
+    	  <%= display req.description %>
+	<% end %>
   </p>
   <p class="meta">
     <% if req.has_approved? %><%= approved_message(req) %><br><% end -%>

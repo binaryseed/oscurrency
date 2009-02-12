@@ -18,7 +18,7 @@ class BidsController < ApplicationController
     respond_to do |format|
       if @bid.save
         bid_note = Message.new()
-        bid_note.subject = "BID: " + @bid.estimated_hours.to_s + " hours - " + @req.name 
+        bid_note.subject = "BID: " + @bid.estimated_hours.to_s + " marbles - " + @req.name 
         bid_note.content = "See your <a href=\"" + req_path(@req) + "\">request</a> to consider bid"
         bid_note.sender = @bid.person
         bid_note.recipient = @req.person
@@ -188,15 +188,26 @@ class BidsController < ApplicationController
   def process_approval
     @bid.approved_at = Time.now
     @bid.status_id = Bid::SATISFIED
-    Account.transfer(@req.person.account,@bid.person.account,@bid.estimated_hours,@req)
+    
+    if @req.isoffer
+      Account.transfer(@bid.person.account,@req.person.account,@bid.estimated_hours,@req)
+    else
+      Account.transfer(@req.person.account,@bid.person.account,@bid.estimated_hours,@req)
+    end
 
     if @bid.save!
       flash[:notice] = 'Work marked verified. Approval notification sent'
       bid_note = Message.new()
-      bid_note.subject = "Verified work for " + @req.name + " (#{@bid.estimated_hours} hours earned)" # XXX make sure length does not exceed 40 chars
-      bid_note.content = "#{@req.person.name} has verified your work for <a href=\"" + req_path(@req) + "\">#{@req.name}</a>. This is an automated message"
-      bid_note.sender = @req.person
-      bid_note.recipient = @bid.person
+      bid_note.subject = "Verified work for " + @req.name + " (#{@bid.estimated_hours} marbles earned)" # XXX make sure length does not exceed 40 chars
+      if @req.isoffer
+        bid_note.content = "#{@bid.person.name} has verified your work for <a href=\"" + req_path(@req) + "\">#{@bid.person.name}</a>. This is an automated message"
+        bid_note.sender = @bid.person
+        bid_note.recipient = @req.person
+      else
+        bid_note.content = "#{@req.person.name} has verified your work for <a href=\"" + req_path(@req) + "\">#{@req.name}</a>. This is an automated message"
+        bid_note.sender = @req.person
+        bid_note.recipient = @bid.person
+      end
       bid_note.save!
     else
       # XXX handle error
