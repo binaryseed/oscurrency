@@ -2,7 +2,7 @@
 <% column_div :type => :primary do -%>
   <h2>Offer</h2>
   <ul class="list full">
-    <%= render :partial => @req, :locals => {:short => false} %>
+    <%= render :partial => @req %>
   </ul>
   <% if @req.active? %>
   <h2>Bids:</h2>

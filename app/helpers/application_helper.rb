@@ -171,11 +171,7 @@ module ApplicationHelper
   # Return a formatting note (depends on the presence of a Markdown library)
   def formatting_note
     if markdown?
-      %(HTML and
-        #{link_to("Markdown",
-                  "http://daringfireball.net/projects/markdown/basics",
-                  :popup => true)}
-       formatting supported)
+      "<p class='formatting'><span>Formatting<br />markup</span> *<em>italic</em>* **<strong>bold</strong>** <br /> [Link Text](http://link_url) <br /> > quote <br /> + list </p>" 
     else 
       "HTML formatting supported"
     end

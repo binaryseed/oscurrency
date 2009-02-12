@@ -28,6 +28,7 @@
           <%= display @preview %>
         <%- end -%>
         
+		<p class='formatting'><%= formatting_note %></p>
         <%= f.text_area :description %>
       </div>
 
@@ -151,4 +152,5 @@
   <% end %>
 <%- end -%>
 
-<%= yui_headers('person_description') %>
+<%= #yui_headers('person_description') 
+%>

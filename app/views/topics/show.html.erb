@@ -9,6 +9,7 @@
 
   <%= error_messages_for :post %>
 
+  <%= formatting_note %>
   <% form_for :post,
               :url => forum_topic_posts_path(@forum, @topic)  do |f| %>
     <div class="form_row">
@@ -26,4 +27,5 @@
   <%= render :partial => 'shared/minifeed' %>
 <%- end -%>
 
-<%= yui_headers('post_body') %>
+<%= #yui_headers('post_body') 
+%>

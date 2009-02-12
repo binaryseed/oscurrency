@@ -20,6 +20,7 @@
   </div>
   <div class="form_row">
     <%= f.label :description %>
+    <%= formatting_note %>
     <%= f.text_area :description, :rows => 5 %>
   </div>
   <div class="form_row full">
@@ -33,6 +34,6 @@
 <%- end -%>
 
 <%- column_div :type => :secondary do -%>
-<%= render :partial => 'searches/box', :locals => {:search_type => "Requests",:search_model=>"Req"} %>
+  <%= render :partial => 'searches/box', :locals => {:search_type => "Requests",:search_model=>"Req"} %>
   <%= render :partial => 'shared/minifeed' %>
 <%- end -%>

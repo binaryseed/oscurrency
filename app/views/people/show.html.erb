@@ -19,9 +19,6 @@
       <%- end -%>
     <%- end -%>
     <div class="toolbox">
-      <%= image_tag @person.main_photo, :class => "profile-image photo",
-                                        :alt => h(@person.name) %>
-
       <ul class="tools">
         <%- unless current_person?(@person) -%>
         <%- if logged_in? -%>
@@ -41,11 +38,16 @@
           <%- if logged_in? -%>
             <li><%= account_link @person %></li>
           <%- end -%>
+		
         <%- end -%>
       </ul>
-    </div>
     <%= display @person.formatted_categories, :class => "meta" %>
-    <%= display simple_format_without_paragraph @person.description %>
+
+      <%= image_tag @person.main_photo, :class => "profile-image photo",
+                                        :alt => h(@person.name) %>
+
+    </div>
+    <%= display @person.description %>
   </div>
 
   <%= render :partial => 'recent_exchanges' %>
