@@ -4,20 +4,32 @@
     <%= image_link bid.person, :image => :thumbnail %>
     <%= image_tag "icons/new.gif", :class => "icon", :alt => "Bid" %>
   </div>
-    <% if current_person?(bid.req.person) && !bid.req.has_accepted_bid? -%>
+    <% if current_person?(bid.req.person) && bid.status_id < Bid::ACCEPTED # && !bid.req.has_accepted_bid? 
+	-%>
       <% form_for :bid, :url => req_bid_path(bid.req, bid), :html => {:method => :put} do |f| %>
         <%= f.hidden_field :status_id, :value => Bid::ACCEPTED %>
         <%= f.submit "Accept" %>
       <% end -%>
     <% end -%>
+
+    <%= render :partial => "shared/accepted_bid", :object => bid %>
+
   <p>
   Marble bid: <%= h bid.estimated_hours %> - expires <%= relative_time_ago_in_words(bid.expiration_date) %>
   </p>
   <p class="description">
   	<%= h bid.description %>
   </p>
+  <div class="col_content">
   <p class="meta">
-<% if bid.status_id >= Bid::ACCEPTED %>Accepted <%= time_ago_in_words(bid.accepted_at) -%> ago<br><% end %>   Submitted by <%= person_link bid.person %>
+	
+    <% if bid.approved? %><%= bid_approved_message(bid) %><br><% end -%>
+    <% if bid.completed? %><%= bid_completed_message(bid) %><br><% end -%>
+    <% if bid.commitment? %><%= bid_commitment_message(bid) %><br><% end -%>
+    <% if bid.accepted? %><%= bid_accepted_message(bid) %><br><% end -%>
+	
+	
+   Submitted by <%= person_link bid.person %>
     <%= time_ago_in_words(bid.created_at) %> ago
     <% if admin? || current_person?(bid.person) -%>
     | <%= link_to "Delete", req_bid_path(bid.req,bid), :confirm => 'Are you sure?', :method => :delete %>
@@ -27,4 +39,5 @@
       <%= number_with_precision(bid.person.address.distance_to(current_person.address)).to_s %> miles away
     <% end -%>
   </p>
+  </div>
 </li>

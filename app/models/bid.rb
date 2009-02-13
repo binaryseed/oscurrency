@@ -13,5 +13,22 @@ class Bid < ActiveRecord::Base
   COMPLETED = 5
   SATISFIED = 6
   NOT_SATISFIED = 7
+  
+  def accepted?
+    status_id >= ACCEPTED
+  end
+
+  def approved?
+    status_id == SATISFIED
+  end
+
+  def completed?
+    completed_at != nil
+  end
+
+  def commitment?
+    committed_at != nil
+  end
+
 
 end

@@ -5,7 +5,8 @@
     <%= image_tag "icons/new.gif", :class => "icon", :alt => "Offer" %>
   </div>
 <div class="col_content">
-  <% if req.has_accepted_bid? %>
+  <% # disable - rendered with each bid now
+     if false && req.has_accepted_bid? %>
     <%= render :partial => "shared/accepted_bid", :object => req.accepted_bid %>
   <% end -%>
   <p>
