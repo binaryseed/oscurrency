@@ -172,6 +172,21 @@ class Person < ActiveRecord::Base
   def to_param
     "#{id}-#{name.to_safe_uri}"
   end
+  
+  def short_description    
+    if description == ""
+      ""
+    else
+      short = description
+      short.gsub(/<(.*)>/,"").slice(0,100).chomp+"..."
+    end
+  end
+  
+  def net_activity
+    cust = Exchange.find_all_by_customer_id(self).collect{|i|i.amount.to_i}.to_a
+    work = Exchange.find_all_by_worker_id(self).collect{|i|i.amount.to_i}.to_a
+    cust.concat(work).inject{|sum,n|sum+n}
+  end
 
   ## Feeds
 

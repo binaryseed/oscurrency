@@ -4,6 +4,7 @@
     <%= image_link req.person, :image => :thumbnail %>
     <%= image_tag "icons/new.gif", :class => "icon", :alt => "Request" %>
   </div>
+<div class="col_content">
   <% if req.has_accepted_bid? %>
     <%= render :partial => "shared/accepted_bid", :object => req.accepted_bid %>
   <% end -%>
@@ -39,14 +40,15 @@
     Created by <%= person_link req.person %>
     <%= time_ago_in_words(req.created_at) %> ago
     <% if current_person?(req.person) -%>
-    | <%= link_to "Edit", edit_req_path(req) unless req.has_accepted_bid? %>
+      <%= link_to "Edit", edit_req_path(req) unless req.has_accepted_bid? %>
     <% end -%>
     <% if admin? || current_person?(req.person) -%>
-    | <%= link_to "Delete", req, :confirm => 'Are you sure?', :method => :delete unless (req.has_commitment? || req.has_approved?) %>
+      <%= link_to "Delete", req, :confirm => 'Are you sure?', :method => :delete unless (req.has_commitment? || req.has_approved?) %>
     <% end -%>
     <br>
     <% if false && !current_person.address.nil? && !req.person.address.nil? && !current_person?(req.person) -%>
       <%= number_with_precision(req.person.address.distance_to(current_person.address)).to_s %> miles away
     <% end -%>
   </p>
+</div>
 </li>

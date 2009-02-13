@@ -14,9 +14,13 @@ class Req < ActiveRecord::Base
   after_create :log_activity
   
   
-  def short_description
-    lines = description.split("\n")
-    lines.slice(0,4).join("\n")
+  def short_description    
+    if defined? description 
+      short = description
+      short.gsub(/<(.*)>/,"").slice(0,100)+"..."
+    else
+      ""
+    end
   end
 
   def get_name

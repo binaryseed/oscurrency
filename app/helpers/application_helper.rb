@@ -133,6 +133,16 @@ module ApplicationHelper
     concat(content, block.binding)
   end
 
+  def volume_link(person, options = {})
+    path = person_path(person) # XXX link to transactions
+    img = image_tag("icons/bargraph.gif")
+    action = "Net Activity: #{person.net_activity} marbles"
+    opts = {}
+    str = link_to(img,path, opts)
+    str << "&nbsp;"
+    str << link_to_unless_current(action, path, opts)
+  end
+
   def account_link(person, options = {})
     path = person_path(person) # XXX link to transactions
     img = image_tag("icons/bargraph.gif")

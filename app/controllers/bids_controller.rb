@@ -71,8 +71,8 @@ class BidsController < ApplicationController
         end
       end
     when Bid::ACCEPTED
-      unless current_person?(@bid.person)
-        if current_person?(@req.person)
+      unless current_person?(@bid.person)    or current_person?(@req.person)
+        if current_person?(@req.person)      or current_person?(@bid.person)
           # check for approval
           if Bid::SATISFIED != status.to_i
             flash[:error] = 'Unexpected state change'
@@ -109,8 +109,8 @@ class BidsController < ApplicationController
         end
       end
     when Bid::COMMITTED
-      unless current_person?(@bid.person)
-        if current_person?(@req.person)
+      unless current_person?(@bid.person)       or current_person?(@req.person)
+        if current_person?(@req.person)         or current_person?(@bid.person)
           # check for approval
           if Bid::SATISFIED != status.to_i
             flash[:error] = 'Unexpected state change'
@@ -147,7 +147,7 @@ class BidsController < ApplicationController
         end
       end
     when Bid::COMPLETED
-      unless current_person?(@req.person)
+      unless current_person?(@req.person)       or current_person?(@bid.person)
         flash[:error] = 'Nothing to see here. Move along'
       else
         if Bid::SATISFIED != status.to_i

@@ -25,6 +25,7 @@
             <li><%= exchange_link @person %></li>
             <li><%= email_link @person %></li>
             <li><%= account_link @person %></li>
+            <li><%= volume_link @person %></li>
           <%- end -%>
           <%- if current_person.admin? -%>
             <li>
@@ -37,6 +38,7 @@
         <% else -%>
           <%- if logged_in? -%>
             <li><%= account_link @person %></li>
+            <li><%= volume_link @person %></li>
           <%- end -%>
 		
         <%- end -%>

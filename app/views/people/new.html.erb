@@ -41,10 +41,11 @@
     <label for="person_description">Let the other members know something about yourself or the skills you bring to the community.
     </label>
 
+    <%= formatting_note %>
+
     <%- unless @preview.nil? -%>
       <%= display @preview %>
     <%- end -%>
-    
     <%= f.text_area :description %>
   </div>  
 
@@ -64,4 +65,5 @@
   </div>
   <% end %>
 <%- end -%>
-<%= yui_headers('person_description') %>
+<%= #yui_headers('person_description') 
+%>

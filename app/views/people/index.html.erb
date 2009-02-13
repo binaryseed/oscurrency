@@ -3,7 +3,7 @@
     <h2>People</h2>
     <%= will_paginate %>
     <ul class="list people">
-      <%= render :partial => @people %>
+      <%= render :partial => @people, :locals => {:short => true} %>
     </ul>
     <%= will_paginate %>
   <% end -%>

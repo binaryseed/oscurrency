@@ -7,10 +7,15 @@
 
 <% end -%>
 
+
 <% column_div :type => :secondary do -%>
+
+<h2>Add new event</h2>
+<div class="status-btn">
+  <input type="button" name="update" value="Create Event" id="update-submit" class="round-btn" onclick="document.location='<%= new_event_path %>';" />
+</div>
+
   <%= render :partial => 'calendar',
              :locals => { :events => @month_events, :date => @date } %>
 
-  <h2>Add new event</h2>
-  <%= link_to "Click here", new_event_path %>
 <% end -%>

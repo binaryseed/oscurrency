@@ -1,5 +1,5 @@
 body {
-  font-family: Helvetica, Arial, Univers, Tahoma, sans-serif;
+  font-family:Helvetica, Arial, Univers, Tahoma, sans-serif;
   font-size: 1em;
   line-height:  1.05em;  
 }
@@ -26,9 +26,8 @@ h6 {
   margin-bottom: 1em;
 }
 h2 {
-  background: url(/images/green-grad.jpg) 30px 10px repeat-x;
+  background: url(/images/black-grad.jpg) 30px 10px repeat-x;
   border-bottom: 1px solid #ccc;
-  color: #009908;
   clear: both;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 22px;
@@ -103,9 +102,17 @@ pre {
   padding: 1em;
 }
 a:link,a:visited {
-  color: #009908;
+  color:#169a20;
   font-weight: bold;
-  text-decoration: none;
+  text-decoration:none;
+}
+#nav a
+{
+    text-decoration:none;
+}
+a:hover
+{
+    text-decoration:underline;
 }
 /* Specific elements */
 p.welcome {
@@ -150,8 +157,8 @@ body.blog .comments p, body.forum .reply p {
 
 /* Have followed links change color (e.g., in forums). */
 a.show-follow:visited {
-  color: #309;
-  text-decoration: none;
+/*  color: #309;*/
+/*  text-decoration: none;*/
 }
 
 /* Alerts and notifications */
@@ -281,7 +288,7 @@ body.single-col .col1 form input.checkbox {
   float: left;
   margin-right: 6px;
   vertical-align: middle;
-  width: 138px;
+  width: 177px;
 }
 #frmSearch #btnSearch.button {
   display: inline;

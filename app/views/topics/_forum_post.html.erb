@@ -4,6 +4,7 @@
     <%= image_link forum_post.person, :image => :thumbnail %>
     <%= image_tag "icons/comment.gif", :class => "icon" %>
   </div>
+<div class="col_content">
   <p class="meta"><%= person_link forum_post.person %> posted
       <%= time_ago_in_words(forum_post.created_at) %> ago
       <%- if current_person?(forum_post.person) or admin? -%>
@@ -20,4 +21,5 @@
   <div class="forum">
   <%= display forum_post.body %>
   </div>
+</div>
 </li>
