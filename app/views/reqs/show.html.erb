@@ -25,7 +25,8 @@
   </ul>
   <%- end -%>
 
-    <% unless ( current_person?(@req.person) || !@req.active ) -%>
+    <% unless ( current_person?(@req.person) ) #|| !@req.active ) 
+	-%>
       <h2>New bid</h2>
 
       <%= error_messages_for :req %>

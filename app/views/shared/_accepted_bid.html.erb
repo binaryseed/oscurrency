@@ -5,7 +5,7 @@
 %>
 <% if accepted_bid.req.isoffer %>
 
-	<% if current_person?(accepted_bid.req.person) && accepted_bid.status_id < Bid::COMPLETED -%>
+	<% if current_person?(accepted_bid.req.person) && accepted_bid.status_id < Bid::COMPLETED && accepted_bid.status_id > Bid::ACCEPTED -%>
 	  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put} do |f| %>
 	    <%= f.hidden_field :status_id, :value => ( accepted_bid.status_id + 1 ) %>
 	    <%= f.submit( accepted_bid.status_id == Bid::ACCEPTED ? "Commit to Offer" : "Click if done" ) %>
@@ -19,7 +19,7 @@
 
 <% else %>
 
-	<% if current_person?(accepted_bid.person) && accepted_bid.status_id < Bid::COMPLETED -%>
+	<% if current_person?(accepted_bid.person) && accepted_bid.status_id < Bid::COMPLETED && accepted_bid.status_id > Bid::ACCEPTED -%>
 	  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put} do |f| %>
 	    <%= f.hidden_field :status_id, :value => ( accepted_bid.status_id + 1 ) %>
 	    <%= f.submit( accepted_bid.status_id == Bid::ACCEPTED ? "Commit to Request" : "Click if done" ) %>
