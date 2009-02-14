@@ -1,8 +1,19 @@
 <%- column_div :type => :primary do -%>
-  <h2>Sign in</h2>
+  <h2>sign in</h2>
+
+<div style='padding-left:25px'>
+
+  <div class="status-btn" style='position:relative;z-index:100;'>
+    <input  style='position:absolute;left:385px;width:115px;' type="button" value="Sign Up"  class="round-btn" onclick="document.location='<%= signup_path %>';" />
+  </div>
+
+
 
   <% form_tag session_path do -%>
 <span id="standard">
+	
+
+
     <div class="form_row">
       <label for="email">Email address</label>
       <%= text_field_tag 'email', params[:email],
@@ -26,22 +37,28 @@
       <%= check_box_tag 'remember_me', '1', true, :class => "checkbox" %>
     </div>
 
-    <div class="form_row">
+    <div class="form_row" style='margin-left:5px'>
       <%= submit_tag 'Sign in', :class => "button" %>
     </div>
 
-<div style="text-align: center; font-size: 12px; padding: 10px;">
-  <%= link_to "or Sign up", signup_path %> <br />
+<div style="text-align: center; font-size: 12px; padding: 10px; width:313px">
+	
+
+
+
   <%- if global_prefs.can_send_email? -%>
     <%= link_to "I forgot my password!", new_password_reminder_path %> ::
   <%- end -%>
-    <span id="noscript" style="display:none;">
+    <span id="noscript" style="display:none">
         <span id="openid_link"><a href="#" onclick="show_openid(); return false;">Login using OpenID</a></span>
         <span id="standard_link"><a href="#" onclick="show_standard(); return false;">Back to Regular Login</a></span>
     </span>
 
 </div>
   <% end -%>
+
+</div>
+
 <%- end -%>
 <script type='text/javascript'>
 show_openid = function() {

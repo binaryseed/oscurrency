@@ -26,7 +26,7 @@
         
           <p class="welcome">
             <%- if logged_in? -%>
-              Welcome, <%= h current_person.name %>!
+              Welcome, <span class="name"><%= h current_person.name %></span>!
               (<%= link_to "Sign out", logout_path %>)
               <%- if current_person.admin? -%>
                 <br />
@@ -52,40 +52,28 @@
     <div id="wrap">
 
       <div id="content">
-      <!--div id="atenroot">
-        <%=  image_tag "aten/aten_root100.png", :alt => "Grass Roots Logo"  %>
 
-      </div-->
-        <%- if global_prefs.demo? -%>
-          <p class="error" style="font-weight: bold;">
-            This is a demonstration site. 
-            Data may be modified or removed without warning.
-          </p>
-        <%- end -%>
         <% flash.each do |key, msg| %>
           <%= content_tag :p, msg, :class => "flash #{key}" %>
-        <% end %>     
+        <% end %>  
+   
         <%= yield %>
-
         
         <div id="footer">
           <p id="footer-nav">
-            <a href="/">Home</a> | <a href="/messages">Messages</a> | <a href="/people">People</a> | <a href="/forums">Forum</a>
-
-          </p>
-          <p>
-		<%= render :partial => 'shared/powered_by' %>
-      <%- unless test? -%>
-        <%# A tracker to tell us about the activity of Insoshi installs %>
-        <img src="http://stats.insoshi.com/<%= @tracker_id %>?env=<%= @env %>" 
-             alt="" width="1" height="1" />
-      <%- end -%>
+            	<a href="/">Columbia Exchange Circle</a>
+		      <%- if logged_in?  -%>
+		           |  <a href="/people">People</a>  | <a href="/forums">Forums</a>
+		      <%- end -%>
           </p>
         </div>
+
       </div>
-      <%- if false and development? -%>
+
+      <%- if logged_in? and current_person.admin? -%>
         <div><%= render :partial => 'shared/debug' %></div>
       <%- end -%> 
+
     </div>
     <%= global_prefs.analytics %>
   </body>

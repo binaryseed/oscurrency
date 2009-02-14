@@ -26,15 +26,16 @@ h6 {
   margin-bottom: 1em;
 }
 h2 {
-  background: url(/images/black-grad.jpg) 30px 10px repeat-x;
-  border-bottom: 1px solid #ccc;
+  background: url(/images/black-grad-top.jpg) top repeat-x;
+  border-top: 1px solid #ccc;
   clear: both;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 22px;
   font-weight: normal;
   line-height: 1.4em;
-  margin-top: 24px;
+  margin-top: 10px;
   padding-left: 6px;
+  padding-right: 6px;
 }
 li h2 {font-size: 1em;}
 h2 a, h3 a {
@@ -44,6 +45,8 @@ h3 {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 20px;
   font-weight: normal;
+  text-transform:lowercase;
+  padding:0px 6px;
 }
 h3.page-title {
   display: none;
@@ -80,8 +83,7 @@ ol li {
 blockquote {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #666666;
-  background: #ececec;
-  border: 1px solid #ccc;
+  background: #f9f9f9;
   padding: 12px;
   margin: 0px;
   text-align:center;
@@ -117,7 +119,8 @@ a:hover
 /* Specific elements */
 p.welcome {
   color: #fff;
-  font-size: 12px
+  font-size: 12px;
+  text-transform:lowercase;
 }
 
 p.welcome a, p.welcome a:visited {
@@ -141,7 +144,7 @@ p.welcome a, p.welcome a:visited {
 }
 
 .meta {
-  color: #aaa;
+  color: #999;
   font-size: 12px;
   line-height: 1.8em;
 }
@@ -218,9 +221,7 @@ a.show-follow:visited {
 
 /* Forms */
 form {
-  border-bottom: 1px solid #ccc;
   padding-bottom: 1em;
-  margin-bottom: 2em; 
 }
 li form {
   float: right;
@@ -258,7 +259,7 @@ input.button, button, input[submit], input[button] {
   padding: 3px 12px;
 }
 .col1 textarea {
-  width: 478px;
+  width: 540px;
 }
 body.single-col .col1 form input {
   width: 312px;
@@ -288,7 +289,7 @@ body.single-col .col1 form input.checkbox {
   float: left;
   margin-right: 6px;
   vertical-align: middle;
-  width: 177px;
+  width: 156px;
 }
 #frmSearch #btnSearch.button {
   display: inline;

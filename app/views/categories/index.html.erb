@@ -12,9 +12,16 @@
 <%- if @top_level_categories.empty? -%>
     <h3 class="blankslate">No categories (yet!)</h3>
 <%- else -%>
-    <ul id="categoryMenu" class="categories">
-      <%= render :partial => 'category', :collection => @top_level_categories %>
+	<% halfish = ((@top_level_categories.length)/2).floor %>
+   <div style='position:relative;padding-top:20px;height:600px'> 
+   <ul id="categoryMenu" class="categories">
+      <%= render :partial => 'category', :collection => @top_level_categories[0,halfish] %>
+  </ul>
+    <ul id="categoryMenu2" class="categories">
+      <%= render :partial => 'category', :collection => @top_level_categories[-halfish,halfish] %>
     </ul>
+    <br />
+   </div>
 <%- end -%>
 
 <%- end -%>

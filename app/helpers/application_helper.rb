@@ -4,26 +4,26 @@ module ApplicationHelper
   ## Menu helpers
   
   def menu
-    home     = menu_element("Home",   home_path)
+    home     = menu_element("home",   home_path)
     categories = menu_element("SkillBank", categories_path)
-    people   = menu_element("People", people_path)
+    people   = menu_element("friends", people_path)
     if Forum.count == 1
-      forum = menu_element("Forum", forum_path(Forum.find(:first)))
+      forum = menu_element("forum", forum_path(Forum.find(:first)))
     else
-      forum = menu_element("Forums", forums_path)
+      forum = menu_element("forums", forums_path)
     end
-    resources = menu_element("Resources", "http://docs.insoshi.com/")
+    # resources = menu_element("Resources", "http://docs.insoshi.com/")
     if logged_in? and not admin_view?
-      profile  = menu_element("Home",  person_path(current_person))
+      profile  = menu_element("home",  person_path(current_person))
       offers = menu_element("Offers", offers_path)
       requests = menu_element("Requests", reqs_path)
-      messages = menu_element("Inbox", messages_path)
+      messages = menu_element("inbox", messages_path)
 #      blog     = menu_element("Blog",     blog_path(current_person.blog))
-      photos   = menu_element("Photos",   photos_path)
+      # photos   = menu_element("Photos",   photos_path)
 #      contacts = menu_element("Contacts",
 #                              person_connections_path(current_person))
 #      links = [home, profile, contacts, messages, blog, people, forum]
-      events   = menu_element("Events", events_path)
+      events   = menu_element("events", events_path)
       links = [ profile, people, categories, offers, requests, messages, forum]
       # TODO: remove 'unless production?' once events are ready.
       links.push(events) #unless production?
@@ -32,7 +32,7 @@ module ApplicationHelper
       home =    menu_element("Home", home_path)
       spam = menu_element("Spam", admin_broadcast_emails_path)
       people =  menu_element("People", admin_people_path)
-      forums =  menu_element(inflect("Forum", Forum.count),
+      forums =  menu_element(inflect("forum", Forum.count),
                              admin_forums_path)
       preferences = menu_element("Prefs", admin_preferences_path)
       links = [home, spam, people, forums, preferences]

@@ -6,7 +6,7 @@
     <%= feed_icon activity %>
   </div>
   <p>
-    <%= feed_message activity %>
+    <%= feed_message(activity).downcase %>
       <%- if current_person?(activity.person) -%>
         <%= link_to(image_tag("icons/close.gif"), 
                           activity_path(activity), 
@@ -15,7 +15,7 @@
   <%- end -%>
     </p>
   <p class="meta published">
-    <%= time_ago_in_words(activity.created_at).capitalize %> ago
+    <%= time_ago_in_words(activity.created_at) %> ago
   </p>
 
 </li>

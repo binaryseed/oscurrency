@@ -4,7 +4,6 @@
     <%= image_link req.person, :image => :thumbnail %>
     <%= image_tag "icons/new.gif", :class => "icon", :alt => "Request" %>
   </div>
-<div class="col_content">
   <% # disable - rendered with each bid now
      if false && req.has_accepted_bid? %>
     <%= render :partial => "shared/accepted_bid", :object => req.accepted_bid %>
@@ -21,8 +20,9 @@
 	
 	
 	(<%= h req.estimated_hours %> Marbles)
-    Due: <%= relative_time_ago_in_words(req.due_date) %>
+    <span class="meta">Due: <%= relative_time_ago_in_words(req.due_date) %></span>
   </p>
+<div class="col_content">
   <p class="meta">
     <%= h req.categories[0].long_name unless req.categories.empty? %>
   </p>
@@ -41,7 +41,7 @@
     <% if false && req.has_commitment? %><%= commitment_message(req) %><br><% end -%>
     <% if false && req.has_accepted_bid? %><%= accepted_message(req) %><br><% end -%>
 
-    Created by <%= person_link req.person %>
+    Posted by <%= person_link req.person %>
     <%= time_ago_in_words(req.created_at) %> ago
     <% if current_person?(req.person) -%>
       <%= link_to "Edit", edit_req_path(req) unless req.has_accepted_bid? %>
