@@ -3,31 +3,32 @@
 #            show comfirm complete for 'bidder' only after 'offerer' is COMMITTED
 #                                                    until status is
 %>
+
 <% if accepted_bid.req.isoffer %>
 
-	<% if current_person?(accepted_bid.req.person) && accepted_bid.status_id < Bid::COMPLETED && accepted_bid.status_id > Bid::ACCEPTED -%>
+	<% if current_person?(accepted_bid.req.person) && accepted_bid.status_id < Bid::COMPLETED && accepted_bid.status_id >= Bid::ACCEPTED -%>
 	  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put} do |f| %>
 	    <%= f.hidden_field :status_id, :value => ( accepted_bid.status_id + 1 ) %>
 	    <%= f.submit( accepted_bid.status_id == Bid::ACCEPTED ? "Commit to Offer" : "Click if done" ) %>
 	  <% end -%>
-	<% elsif current_person?(accepted_bid.person) && accepted_bid.status_id > Bid::COMMITTED && accepted_bid.status_id < Bid::SATISFIED -%>
+	<% elsif current_person?(accepted_bid.person) && accepted_bid.status_id > Bid::ACCEPTED && accepted_bid.status_id < Bid::SATISFIED -%>
 	  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put} do |f| %>
 	    <%= f.hidden_field :status_id, :value => Bid::SATISFIED %>
-	    <%= f.submit "Confirm complete" %>
+	    <%= f.submit "Confirm Complete" %>
 	  <% end -%>
 	<% end -%>
 
 <% else %>
 
-	<% if current_person?(accepted_bid.person) && accepted_bid.status_id < Bid::COMPLETED && accepted_bid.status_id > Bid::ACCEPTED -%>
+	<% if current_person?(accepted_bid.person) && accepted_bid.status_id < Bid::COMPLETED && accepted_bid.status_id >= Bid::ACCEPTED -%>
 	  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put} do |f| %>
 	    <%= f.hidden_field :status_id, :value => ( accepted_bid.status_id + 1 ) %>
 	    <%= f.submit( accepted_bid.status_id == Bid::ACCEPTED ? "Commit to Request" : "Click if done" ) %>
 	  <% end -%>
-	<% elsif current_person?(accepted_bid.req.person) && accepted_bid.status_id < Bid::SATISFIED -%>
+	<% elsif current_person?(accepted_bid.req.person) && accepted_bid.status_id > Bid::ACCEPTED && accepted_bid.status_id < Bid::SATISFIED -%>
 	  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put} do |f| %>
 	    <%= f.hidden_field :status_id, :value => Bid::SATISFIED %>
-	    <%= f.submit "Confirm complete" %>
+	    <%= f.submit "Confirm Complete" %>
 	  <% end -%>
 	<% end -%>
 

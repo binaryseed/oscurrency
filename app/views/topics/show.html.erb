@@ -1,11 +1,12 @@
 <%- column_div :type => :primary do -%>
-  <h2><%= h @topic.name %></h2>
+  <h2>Topic: <%= h @topic.name %></h2>
   <ul class="list topic full">
     <%= render :partial => 'forum_post', :collection => @posts %>
   </ul>
 
+<br style="clear:both;" />
 
-  <h3>Add new post</h3>
+  <h3>new post</h3>
 
   <%= error_messages_for :post %>
 

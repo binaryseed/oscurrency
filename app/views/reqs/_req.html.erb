@@ -2,7 +2,7 @@
   <a name="req_<%= req.id %>"></a>
   <div class="profile-image">
     <%= image_link req.person, :image => :thumbnail %>
-    <%= image_tag "icons/new.gif", :class => "icon", :alt => "Request" %>
+    <%= image_tag "icons/arrow_right.gif", :class => "icon", :alt => "Request" %>
   </div>
   <% # disable - rendered with each bid now
      if false && req.has_accepted_bid? %>
@@ -24,7 +24,9 @@
   </p>
 <div class="col_content">
   <p class="meta">
-    <%= h req.categories[0].long_name unless req.categories.empty? %>
+
+	<%= req.categories.collect { |cat| cat.long_name + "<br />"}.to_s %>
+
   </p>
   <p>
     <% if defined? short %>
@@ -44,10 +46,12 @@
     Posted by <%= person_link req.person %>
     <%= time_ago_in_words(req.created_at) %> ago
     <% if current_person?(req.person) -%>
-      <%= link_to "Edit", edit_req_path(req) unless req.has_accepted_bid? %>
+     | <%= link_to "Edit", edit_req_path(req) #unless req.has_accepted_bid?
+      %>
     <% end -%>
     <% if admin? || current_person?(req.person) -%>
-      <%= link_to "Delete", req, :confirm => 'Are you sure?', :method => :delete unless (req.has_commitment? || req.has_approved?) %>
+      | <%= link_to "Delete", req, :confirm => 'Are you sure?', :method => :delete #unless (req.has_commitment? || req.has_approved?) 
+      %>
     <% end -%>
     <br>
     <% if false && !current_person.address.nil? && !req.person.address.nil? && !current_person?(req.person) -%>

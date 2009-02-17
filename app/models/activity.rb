@@ -17,7 +17,7 @@ class Activity < ActiveRecord::Base
   belongs_to :item, :polymorphic => true
   has_many :feeds, :dependent => :destroy
   
-  GLOBAL_FEED_SIZE = 10
+  GLOBAL_FEED_SIZE = 15
 
   # Return a feed drawn from all activities.
   # The fancy SQL is to keep inactive people out of feeds.

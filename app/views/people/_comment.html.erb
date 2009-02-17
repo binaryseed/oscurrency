@@ -3,18 +3,18 @@
     <%= image_link(comment.commenter, :image => :thumbnail) %>
     <%= image_tag "icons/comment.gif", :class => "icon" %>
   </div>
-  <p class="meta published">
+  <p class=" published">
     <%= person_link comment.commenter %> said
-    <%= time_ago_in_words(comment.created_at) %> ago
   </p>
 <div class="col_content">
   <%= display comment.body %>
 
+<p class="meta"><%= time_ago_in_words(comment.created_at) %> ago
   <%- if (current_person?(comment.commentable) or
           current_person?(comment.commenter)) -%>
-  <br />
-  <%= link_to "delete", person_comment_path(@person, comment),
+  | <%= link_to "delete", person_comment_path(@person, comment),
                         :method => :delete %>
   <%- end -%>  
+</p>
 </div>
 </li>

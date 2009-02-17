@@ -14,7 +14,7 @@ module ApplicationHelper
     end
     # resources = menu_element("Resources", "http://docs.insoshi.com/")
     if logged_in? and not admin_view?
-      profile  = menu_element("home",  person_path(current_person))
+      profile  = menu_element("profile",  person_path(current_person))
       offers = menu_element("Offers", offers_path)
       requests = menu_element("Requests", reqs_path)
       messages = menu_element("inbox", messages_path)
@@ -24,7 +24,7 @@ module ApplicationHelper
 #                              person_connections_path(current_person))
 #      links = [home, profile, contacts, messages, blog, people, forum]
       events   = menu_element("events", events_path)
-      links = [ profile, people, categories, offers, requests, messages, forum]
+      links = [ home, profile, people, categories, offers, requests, messages, forum]
       # TODO: remove 'unless production?' once events are ready.
       links.push(events) #unless production?
       
@@ -48,11 +48,11 @@ module ApplicationHelper
       if !global_prefs.steps.blank?
         links.push(menu_element("Steps", steps_url))
       end
-      if !global_prefs.questions.blank?
-        links.push(menu_element("Q/A", questions_url))
-      end
       if !global_prefs.memberships.blank?
-        links.push(menu_element("Memberships", memberships_url))
+        links.push(menu_element("Joining", memberships_url))
+      end
+      if !global_prefs.questions.blank?
+        links.push(menu_element("Questions", questions_url))
       end
       if !global_prefs.contact.blank?
         links.push(menu_element("Contact", contact_url))
@@ -145,7 +145,7 @@ module ApplicationHelper
 
   def account_link(person, options = {})
     path = person_path(person) # XXX link to transactions
-    img = image_tag("icons/bargraph.gif")
+    img = image_tag("icons/shopping_cart.gif")
     action = "Balance: #{person.account.balance} marbles"
     opts = {}
     str = link_to(img,path, opts)
@@ -157,7 +157,7 @@ module ApplicationHelper
     img = image_tag("icons/switch.gif")
     path = new_person_exchange_path(person)
     opts = {}
-    action = "Transfer marbles"
+    action = "Give marbles"
     str = link_to(img,path,opts)
     str << "&nbsp;"
     str << link_to_unless_current(action, path, opts)
@@ -181,9 +181,9 @@ module ApplicationHelper
   # Return a formatting note (depends on the presence of a Markdown library)
   def formatting_note
     if markdown?
-      "<p class='formatting'><span>Formatting<br />markup</span> *<em>italic</em>* **<strong>bold</strong>** <br /> [Link Text](http://link_url) <br /> > quote <br /> + list </p>" 
+      "<p class='formatting'><span>Formatting markup</span><br /> *<em>italic</em>* **<strong>bold</strong>** <br /> [Link Text](http://link_url) <br /> > quote <br /> + list </p>" 
     else 
-      "HTML formatting supported"
+      " "
     end
   end
 

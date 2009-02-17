@@ -16,4 +16,7 @@ class HomeController < ApplicationController
       format.html
     end  
   end
+  
+  def dashboard
+  end
 end

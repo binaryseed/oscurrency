@@ -1,11 +1,11 @@
 <%= render :partial => 'jscript', :locals => { :jscript_file_name => 'bid_form' } %>
 <% column_div :type => :primary do -%>
-  <h2>Offer</h2>
+  <h2><%= @req.person.name %>'s Offer</h2>
   <ul class="list full">
     <%= render :partial => @req %>
   </ul>
   <% if @req.active? %>
-  <h2>Bids:</h2>
+  <h2>Bids</h2>
   <ul class="list full">
     <% if @req.bids.empty? -%>
         <h3 class="blankslate">No bids (yet!)</h3>
@@ -17,14 +17,14 @@
 
     <% unless ( current_person?(@req.person) )#|| !@req.active ) 
 	-%>
-      <h2>New bid</h2>
+      <h2>Make a Bid</h2>
 
       <%= error_messages_for :req %>
 
       <% form_for :bid, :url => req_bids_path(@req) do |f| %>
         <div class="form_row">
           <%= f.label :marbles %>
-          <%= f.text_field :estimated_hours, :size => 2 %>
+          <%= f.text_field :estimated_hours, :size => 8 %>
         </div>
         <div class="form_row">
           <%= f.label :expiration_date %>
@@ -35,7 +35,7 @@
           <%= f.text_area :description, :rows => 4 %>
         </div>
         <div class="form_row">
-          <%= f.submit "Submit" %>
+          <%= f.submit "Submit Bid" %>
         </div>
       <% end %>
     <%- end -%>

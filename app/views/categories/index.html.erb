@@ -6,14 +6,14 @@
 </script>
 <%= javascript_include_tag 'cat_accordion' %>
 <% end -%>  
-<%- column_div :type => :primary do -%>
 <h2>SkillBank Categories</h2>
+<%- column_div :type => :primary do -%>
 
 <%- if @top_level_categories.empty? -%>
     <h3 class="blankslate">No categories (yet!)</h3>
 <%- else -%>
 	<% halfish = ((@top_level_categories.length)/2).floor %>
-   <div style='position:relative;padding-top:20px;height:600px'> 
+   <div style='position:relative;padding-top:5px;height:600px'> 
    <ul id="categoryMenu" class="categories">
       <%= render :partial => 'category', :collection => @top_level_categories[0,halfish] %>
   </ul>
@@ -24,10 +24,8 @@
    </div>
 <%- end -%>
 
+<%= render :partial => 'shared/add_category_button' %>
+
 <%- end -%>
 
-<%- column_div :type => :secondary do -%>
-	<%= render :partial => 'shared/add_category_button' %>
-  <%= # render :partial => 'searches/box' 
-%>
-<%- end -%>
+

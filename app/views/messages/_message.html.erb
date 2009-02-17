@@ -10,6 +10,7 @@
       <%= image_tag("icons/reply.gif", :class => "icon" )  %>
     <%- end -%>    
   </div>
+<div class="col_content">
   <p>
     <%- if current_person?(message.sender) -%>
       <span class="label">To:</span>
@@ -20,12 +21,12 @@
     <%- end -%>
     <span class="meta"><%= time_ago_in_words message.created_at %> ago</span>
   </p>
-  <p>
+	<p class="show-follow">
     <span class="label">Subject:</span>
     <%= link_to sanitize(message.subject),
                 message_path(message, :anchor => message_anchor(message)) %>
   </p>
-  <p class="tools meta">
+  <p class="meta">
     <%= link_to "Read", message %> |
     <%= link_to "Reply", reply_message_path(message) %> |
     <% unless message.trashed?(current_person) -%>
@@ -34,5 +35,5 @@
       <%= link_to "Untrash", undestroy_message_path(message),
                              :method => :put %>
     <% end -%>    
-  </p>
+  </p></div>
 </li>

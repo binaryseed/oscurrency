@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   skip_before_filter :require_activation, :only => [:new, :destroy]
 
   def new
-    @body = "login single-col"
+    @body = "login"
   end
 
   def create

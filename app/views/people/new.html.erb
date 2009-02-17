@@ -2,17 +2,19 @@
   <%- if global_prefs.app_name.blank? -%>
   <h2>Sign up</h2>
   <%- else -%>
-  <h2>Sign up for <%= global_prefs.app_name %></h2>
+  <h1>Sign up for <%= global_prefs.app_name %></h1>
   <%- end -%>
 
   <%= error_messages_for :person %>
 
   <div class="desc-message">
-    <p>We verify member information and require new members attend one orientation before participating, so that everyone understands how the Time Exchange works.</p>
-    <p>Please check the calendar on the front page for dates.  You can fill out the form now and it will be approved after you attend an orientation. More information may be <a href="/steps">required</a>.</p>
+    <p>Welcome! have fun.</p>
+    <p class="meta">To prevent SPAM and other bad things from happening, we'll have to confirm your account before it becomes active.</p>
   </div>
 
   <% form_for @person do |f| -%>
+
+<h3>user account</h3>
 
   <div class="form_row">
     <label for="email">
@@ -25,29 +27,10 @@
   </div>
 
   <div class="form_row">
-    <label for="name">Name 
+    <label for="name">Real Name 
       <span class="small">(will be displayed)</span></label>
     <%= f.text_field :name, :maxlength => Person::MAX_NAME %>
   </div>
-  
-
-  <div class="form_row full">
-        <label for="person_categories">Which services would you be willing to offer?
-        </label>
-        <%= render :partial => "shared/select_categories", :locals => { :model_name => 'person' } %>
-  </div>
-  
-  <div class="form_row">
-    <label for="person_description">Let the other members know something about yourself or the skills you bring to the community.
-    </label>
-
-    <%= formatting_note %>
-
-    <%- unless @preview.nil? -%>
-      <%= display @preview %>
-    <%- end -%>
-    <%= f.text_area :description %>
-  </div>  
 
   <div class="form_row">
     <label for="password">Password</label>
@@ -59,6 +42,27 @@
     <%= f.password_field :password_confirmation, 
                          :maxlength => Person::MAX_PASSWORD,
                          :value => "" %>
+  
+<h3>Your Profile</h3>
+<p class="meta">This can be updated at any time</p>
+  <div class="form_row full">
+        <label for="person_categories">Select a few categories that best describe what you're into...
+        </label>
+        <%= render :partial => "shared/select_categories", :locals => { :model_name => 'person' } %>
+  </div>
+  
+  <div class="form_row">
+    <label for="person_description">Describe yourself a bit to everyone...
+    </label>
+
+    <%= formatting_note %>
+
+    <%- unless @preview.nil? -%>
+      <%= display @preview %>
+    <%- end -%>
+    <%= f.text_area :description %>
+  </div>  
+
   </div>
   <div class="form_row">
     <%= submit_tag 'Sign up', :class => "button" %>

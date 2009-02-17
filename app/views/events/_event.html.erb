@@ -6,12 +6,13 @@
   </div>
   <p>
     <%= link_to h(event.title), event, :class => "show-follow" %>
-    Starts at: <%= event.start_time.to_s :short %>
+    <span class="meta">Starts at: <%= event.start_time.to_s :short %>
     <% unless event.end_time.nil? -%>
     / Ends at: <%= event.end_time.to_s :short %>
-    <% end -%>
+    <% end -%></span>
   </p>
-  <p class="col_content">
+  <div class='col_content'>
+  <p> 
     <%=h event.description %>
   </p>
   <p class="meta">
@@ -36,4 +37,5 @@
     <%= link_to "I won't attend", unattend_event_path(event) %>
     <% end -%>
   </p>
+  </div>
 </li>

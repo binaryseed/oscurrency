@@ -1,8 +1,7 @@
-<h2>New message</h2>
 
 <%- column_div :type => :primary do -%>
 
-  <p><%= formatting_note %></p>
+<h2>New message</h2>
 
   <%= error_messages_for :message %>
   
@@ -11,15 +10,16 @@
     <%= display @preview %>
   <%- end -%>
   
-  <%= image_link @recipient, :image => :thumbnail %>
 
   <% form_for(:message,
               :url => person_messages_path(@recipient)) do |f| %>
     <div class="form_row full">
       <label for="recipient">To</label>
-      <%= text_field_tag :recipient, h(@recipient.name) %>
+      <p><%=  person_link (@recipient) %></p>
+        <%= image_link @recipient, :image => :thumbnail %>
+	  
       <!-- TODO: be able to change recipients with this
-      <a href="#" class="add-recipient">
+      <a href="#" class="add-recipient"> text_field_tag :recipient,
         <%= image_tag "icons/add.gif", :alt => "Add a recipient" %>
       </a> -->
     </div>
@@ -29,6 +29,7 @@
     </div>
     <div class="form_row">
       <label for="message_body">Your message</label>
+	  <%= formatting_note %>
       <%= f.text_area :content, :id => "message_body" %>
       <%- if @message.reply? -%>
         <%= f.hidden_field :parent_id %>

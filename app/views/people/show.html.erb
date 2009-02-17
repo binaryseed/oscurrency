@@ -1,6 +1,6 @@
 <%- column_div :type => :primary do -%>
   <div class="profile vcard">
-    <h2>Profile: <span class="fn n name"><%= h @person.name %></span></h2>
+    <h2><span class="fn n name"><%= h @person.name %></span></h2>
     <%- if admin? and not @person.active? -%>
       <p class="error">This person is not active</p>
     <%- end -%>
@@ -12,10 +12,6 @@
                       edit_person_path(@person) %>
         </div>
       <%- else -%>
-        <div class="notice">
-          You are viewing your own profile.
-          <%= link_to "Click here to edit it", edit_person_path(@person) %>
-        </div>
       <%- end -%>
     <%- end -%>
     <div class="toolbox">
@@ -37,6 +33,10 @@
           <%- end -%>
         <% else -%>
           <%- if logged_in? -%>
+          <li>
+	          <%= link_to image_tag("icons/edit.gif"), edit_person_path(@person) %>
+	          <%= link_to "Edit", edit_person_path(@person) %> your profile
+			</li>
             <li><%= account_link @person %></li>
             <li><%= volume_link @person %></li>
           <%- end -%>
@@ -48,17 +48,29 @@
       <%= image_tag @person.main_photo, :class => "profile-image photo",
                                         :alt => h(@person.name) %>
 
-    </div>
+    </div><br style='clear:both'/>
+
     <%= display @person.description %>
+  <%- unless @person.last_logged_in_at.nil? or current_person?(@person) -%>
+    <p class="meta">
+    <%= @person.name %> last logged in 
+    <%= time_ago_in_words(@person.last_logged_in_at) %> ago
+    </p>    
+  <%- end -%>
+
   </div>
 
-  <%= render :partial => 'recent_exchanges' %>
   <%= render :partial => 'wall' %>
-  <%= render :partial => 'recent_activity' %>
+
+<div style="position:relative">
+  <%= render :partial => 'recent_exchanges' %>
+</div>
+
 <%- end -%>
 
 <%- column_div :type => :secondary do -%>
-<%= render :partial => 'searches/box', :locals => {:search_type => "People",:search_model=>"Person"} %>
+<%= render :partial => 'recent_activity' %>
+
   <%= render :partial => 'shared/minifeed' %>
 <%- end -%>
 

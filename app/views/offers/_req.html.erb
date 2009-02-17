@@ -2,7 +2,7 @@
   <a name="req_<%= req.id %>"></a>
   <div class="profile-image">
     <%= image_link req.person, :image => :thumbnail %>
-    <%= image_tag "icons/new.gif", :class => "icon", :alt => "Offer" %>
+    <%= image_tag "icons/arrow_left.gif", :class => "icon", :alt => "Offer" %>
   </div>
   <% # disable - rendered with each bid now
      if false && req.has_accepted_bid? %>

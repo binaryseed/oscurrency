@@ -2,6 +2,7 @@
   <li>
     <div class="profile-image">
     <%= image_link minifeed_item.person %>
+    <%= feed_icon minifeed_item, true %>
   </div>
   <p><%= minifeed_message(minifeed_item).downcase %></p>
   <p class="meta published">

@@ -47,7 +47,7 @@ class Person < ActiveRecord::Base
   TRASH_TIME_AGO = 1.month.ago
   SEARCH_LIMIT = 20
   SEARCH_PER_PAGE = 8
-  MESSAGES_PER_PAGE = 5
+  MESSAGES_PER_PAGE = 10
   NUM_RECENT_MESSAGES = 4
   NUM_WALL_COMMENTS = 10
   NUM_RECENT = 8
@@ -204,7 +204,7 @@ class Person < ActiveRecord::Base
 
   def recent_activity
     Activity.find_all_by_person_id(self, :order => 'created_at DESC',
-                                         :limit => FEED_SIZE)
+                                         :limit => 4)
   end
 
   ## For the home page...

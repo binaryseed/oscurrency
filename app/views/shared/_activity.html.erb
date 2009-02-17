@@ -2,21 +2,21 @@
 <%- unless activity.item.nil? -%>
 <li>
   <div class="profile-image">
-    <%= image_link activity.person, :image => :thumbnail %>
+    <%= image_link activity.person, :image => :icon %>
     <%= feed_icon activity %>
   </div>
   <p>
-    <%= feed_message(activity).downcase %>
-      <%- if current_person?(activity.person) -%>
-        <%= link_to(image_tag("icons/close.gif"), 
-                          activity_path(activity), 
-                          :method => :delete, 
-                          :confirm => %(Are you sure you want to delete this activity from your profile?)) %>
-  <%- end -%>
+    <%= feed_message(activity) %>
+      
     </p>
   <p class="meta published">
     <%= time_ago_in_words(activity.created_at) %> ago
-  </p>
+<%- if current_person?(activity.person) -%>
+        |&nbsp;<%= link_to("delete", 
+                          activity_path(activity), 
+                          :method => :delete, :class => "meta",
+                          :confirm => %(Are you sure you want to delete this activity from your profile?)) %>
+  <%- end -%>  </p>
 
 </li>
 <%- end -%>

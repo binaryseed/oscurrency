@@ -134,7 +134,7 @@ module ActivitiesHelper
   end
   
   # Given an activity, return the right icon.
-  def feed_icon(activity)
+  def feed_icon(activity,side=false)
     img = case activity_type(activity)
             when "BlogPost"
               "blog.gif"
@@ -146,30 +146,39 @@ module ActivitiesHelper
               when "Event"
                 "comment.gif"
               when "Person"
-                "signal.gif"
+                "comment.gif"
               end
             when "Connection"
               "switch.gif"
             when "ForumPost"
-              "new.gif"
+              "comment.gif"
             when "Topic"
               "add.gif"
             when "Photo"
               "camera.gif"
             when "Person"
-              "edit.gif"
+              "user.gif"
             when "Event"
-              "time.gif"
+              "calendar.gif"
             when "EventAttendee"
-              "check.gif"
+              "time.gif"
             when "Req"
-              "new.gif"
+              if activity.item.isoffer
+                "arrow_left.gif"
+              else
+                "arrow_right.gif"
+              end
+              # "new.gif"
             when "Exchange"
-              "favorite.gif"
+              "switch.gif"
             else
               raise "Invalid activity type #{activity_type(activity).inspect}"
             end
-    image_tag("icons/#{img}", :class => "icon")
+    if side
+      image_tag("green_icons/#{img}", :class => "icon")
+    else
+      image_tag("icons/#{img}", :class => "icon")
+    end
   end
   
   def someones(person, commenter, link = true)

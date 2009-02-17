@@ -186,7 +186,7 @@ a.show-follow:visited {
 
 .error,
 .notice, 
-.success    { padding: .8em; margin-bottom: 1em; border: 2px solid #ddd;
+.success    { padding: .8em; margin-bottom: 1em; border: 1px solid #ddd;
               margin-top: 1em; }
 
 .error      { background: #FBE3E4; color: #8a1f11; border-color: #FBC2C4; }
@@ -259,7 +259,8 @@ input.button, button, input[submit], input[button] {
   padding: 3px 12px;
 }
 .col1 textarea {
-  width: 540px;
+  width: 370px;
+  height:73px;
 }
 body.single-col .col1 form input {
   width: 312px;

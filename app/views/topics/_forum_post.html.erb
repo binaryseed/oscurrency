@@ -4,8 +4,7 @@
     <%= image_link forum_post.person, :image => :thumbnail %>
     <%= image_tag "icons/comment.gif", :class => "icon" %>
   </div>
-<div class="col_content">
-  <p class="meta"><%= person_link forum_post.person %> posted
+  <p><%= person_link forum_post.person %> <span class="meta">posted
       <%= time_ago_in_words(forum_post.created_at) %> ago
       <%- if current_person?(forum_post.person) or admin? -%>
         | <%= link_to "Edit",
@@ -17,7 +16,8 @@
                       :confirm => 'Are you sure?',
                       :method => :delete %>
       <%- end -%>
-  </p>
+  </span></p>
+<div class="col_content">
   <div class="forum">
   <%= display forum_post.body %>
   </div>

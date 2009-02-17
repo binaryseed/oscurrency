@@ -1,9 +1,9 @@
 <%- column_div :type => :primary do -%>
-  <h2>Edit profile</h2>
+  <h2>Edit Your Account</h2>
 
   <div id="profile_edit">
 
-  <h3>Personal details</h3>
+  <h3>profile</h3>
 
     <%= error_messages_for :person %>
     
@@ -15,20 +15,20 @@
       </div>
 
   <div class="form_row full">
-        <label for="person_categories">Services Offered
+        <label for="person_categories">Skillbank Categories
         </label>
         <%= render :partial => "shared/select_categories", :locals => { :model_name => 'person' } %>
   </div>
   
       <div class="form_row">
-        <label for="person_description">Description
+        <label for="person_description">Personal Description
         </label>
     
         <%- unless @preview.nil? -%>
           <%= display @preview %>
         <%- end -%>
         
-		<p class='formatting'><%= formatting_note %></p>
+		<%= formatting_note %>
         <%= f.text_area :description %>
       </div>
 
@@ -111,11 +111,11 @@
   </div>
 
   <br />
-  <h3>Addresses</h3>
+  <!-- <h3>Addresses</h3>
   <%= render :partial => 'address', :collection => @person.addresses %>
   <div class="status-btn" style="float: left">
     <input type="button" name="update" value="Add address" id="update-submit" onclick="document.location='<%= new_person_address_path(@person) %>';" />
-  </div>
+  </div> -->
   <br />
 <%- end -%>
 
