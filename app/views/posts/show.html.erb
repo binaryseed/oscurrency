@@ -1,6 +1,7 @@
+<h2>Columbia exchange circle</h2>
+
 <%- column_div :type => :primary do -%>
 
-  <h2><%= link_to "Blog for #{h @blog.person.name}", @blog %></h2>
 
   <h3>
   <%= sanitize @post.title %>
@@ -45,5 +46,6 @@
 <%- end -%>
 
   <%- column_div :type => :secondary do -%>
-    <%= render :partial => 'shared/minifeed' %>
+	<img src="/images/marblehand_sm.jpg" style="border:1px solid black;margin-left:-5px"/>
+    <!-- <%= render :partial => 'shared/minifeed' %> -->
   <%- end -%>

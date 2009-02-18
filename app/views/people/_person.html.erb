@@ -6,7 +6,7 @@
   <div class="col_content">
 	  <p><%= person_link person, :class => "url fn" %></p>
 	  <% if defined? short %>
-	      <%= display person.short_description, :class => "note" %>
+	      <%= display shorten(person.description,100), :class => "note" %>
 		<% else %>
 	  	  <%= display person.description, :class => "note" %>
 		<% end %>

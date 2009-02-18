@@ -19,6 +19,19 @@
   <%- end -%>
   
   <%= will_paginate(@posts) %>
+
+
+  <%- if current_person?(@blog.person) -%>
+  <h2>Add new post</h2>
+
+  <p><%= formatting_note %></p>
+
+  <%= render :partial => 'posts/blog_form',
+             :locals => { :url => blog_posts_path(@blog),
+                          :method => :post } %>
+  <%- end -%>
+
+
 <%- end -%>
 
 <%- column_div :type => :secondary do -%>
@@ -130,15 +143,6 @@
 	
 	
 	
-  <%- if current_person?(@blog.person) -%>
-  <h2>Add new post</h2>
-
-  <p><%= formatting_note %></p>
-
-  <%= render :partial => 'posts/blog_form',
-             :locals => { :url => blog_posts_path(@blog),
-                          :method => :post } %>
-  <%- end -%>
   <% unless global_prefs.gmail.blank? -%>
   <%= render :partial => 'shared/calendar', :object => global_prefs.gmail %>
   <%- end -%>

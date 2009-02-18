@@ -1,5 +1,5 @@
 <%- column_div :type => :primary do -%>
-<h2>Listing events</h2>
+<h2>Upcoming Events</h2>
 
 <ol class="list full">
   <%= render :partial => @events %>
@@ -10,7 +10,6 @@
 
 <% column_div :type => :secondary do -%>
 
-<h2>Add new event</h2>
 <div class="status-btn">
   <input type="button" name="update" value="Create Event" id="update-submit" class="round-btn" onclick="document.location='<%= new_event_path %>';" />
 </div>

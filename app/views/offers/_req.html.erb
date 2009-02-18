@@ -23,7 +23,7 @@
   </p>
   <p>
     <% if defined? short %>
-	      <%= display req.short_description %>
+	      <%= display shorten(req.description,100) %>
 	<% else %>
     	  <%= display req.description %>
 	<% end %>

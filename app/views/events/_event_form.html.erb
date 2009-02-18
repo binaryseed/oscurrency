@@ -22,11 +22,11 @@
                                :mixed => true, :size => 22,
                                :valid_date_check => "date >= (new Date()).stripTime()" %>
 </div>
-<div class="form_row full">
+<!-- <div class="form_row full">
   <%= f.label :reminder %>
   <%= f.check_box :reminder %> 
-</div>
-<div class="form_row full">
+</div> -->
+<div class="form_row full" style="display:none">
   <%= f.label :privacy %>
   <%= f.select :privacy, [["Public", Event::PRIVACY[:public]],["Me and my contacts", Event::PRIVACY[:contacts]]] %> 
 </div>

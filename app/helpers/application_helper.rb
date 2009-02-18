@@ -4,7 +4,7 @@ module ApplicationHelper
   ## Menu helpers
   
   def menu
-    home     = menu_element("home",   home_path)
+    home     = menu_element("blog",   home_path)
     categories = menu_element("SkillBank", categories_path)
     people   = menu_element("friends", people_path)
     if Forum.count == 1
@@ -24,9 +24,8 @@ module ApplicationHelper
 #                              person_connections_path(current_person))
 #      links = [home, profile, contacts, messages, blog, people, forum]
       events   = menu_element("events", events_path)
-      links = [ home, profile, people, categories, offers, requests, messages, forum]
-      # TODO: remove 'unless production?' once events are ready.
-      links.push(events) #unless production?
+      links = [ profile, people, categories, offers, requests, messages, forum, events, home]
+
       
     elsif logged_in? and admin_view?
       home =    menu_element("Home", home_path)
@@ -134,7 +133,7 @@ module ApplicationHelper
   end
 
   def volume_link(person, options = {})
-    path = person_path(person) # XXX link to transactions
+    path = person_path(person)
     img = image_tag("icons/bargraph.gif")
     action = "Net Activity: #{person.net_activity} marbles"
     opts = {}
@@ -325,6 +324,10 @@ end
     # Is a Markdown library present?
     def markdown?
       defined?(RDiscount) or defined?(BlueCloth)
+    end
+    
+    def shorten(str,len=50)
+      str.slice(0,len).gsub(/(\s\S+)$/,"").strip.concat("...")
     end
     
     # Return true if the text *doesn't* start with a paragraph tag.

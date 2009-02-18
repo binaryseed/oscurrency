@@ -9,7 +9,7 @@
     <%= image_link @worker, :image => :thumbnail %>
     <div class="form_row">
       <%= f.label :amount %>
-      <%= f.text_field :amount, :size => 2 %>
+      <%= f.text_field :amount, :size => 8 %>
     </div>
     <% fields_for :req do |r| %>
       <div class="form_row">

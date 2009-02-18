@@ -103,7 +103,10 @@ module ActivitiesHelper
         have connected.)
     when "ForumPost"
       topic = activity.item.topic
-      %(#{person_link(person)} made a #{topic_link("forum post", topic)}.)
+      %(#{person_link(person)} made a post on the forum #{topic_link(topic)}.)
+      # %(#{person_link(person)} made a post on the forum topic
+      #   #{topic_link(post.topic)}.)
+      
     when "Topic"
       %(#{person_link(person)} created a 
         #{topic_link("new discussion topic", activity.item)}.)
@@ -112,7 +115,7 @@ module ActivitiesHelper
     when "Person"
       %(#{person_link(person)}'s description has changed.)
     when "Event"
-      %(#{person_link(person)}'s has created a new #{event_link("event", activity.item)}.)
+      %(#{person_link(person)} has created a new #{event_link("event", activity.item)}.)
     when "EventAttendee"
       event = activity.item.event
       %(#{person_link(person)} is attending #{someones(event.person, person)} #{event_link("event", event)}.)

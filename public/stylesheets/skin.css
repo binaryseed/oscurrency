@@ -584,7 +584,6 @@ p.formatting span
 
 a.show-follow
 {
-    font-size:15px;
 }
 
 
@@ -695,7 +694,7 @@ a.meta, .meta a
 
 
 
-li.bid input, .col1 #bid_submit, .col1 #req_submit, .col1 input.button, .col1 #exchange_submit
+li.bid input, .col1 #bid_submit, .col1 #req_submit, .col1 input.button, .col1 #exchange_submit, .col1 #event_submit
 {
     border:1px solid #7eb0ed;
     color:#1D6AC9;
@@ -731,7 +730,6 @@ li.bid input, .col1 #bid_submit, .col1 #req_submit, .col1 input.button, .col1 #e
 
 select
 {
-    width:370px;
 }
 
 

@@ -13,19 +13,6 @@ class Req < ActiveRecord::Base
   validates_presence_of :name, :due_date
   after_create :log_activity
   
-  
-  def short_description    
-    if defined? description 
-      short = description
-      short.gsub(/<(.*)>/,"").slice(0,100)+"..."
-    else
-      ""
-    end
-  end
-
-  def get_name
-    " " or self.name
-  end
 
   def has_approved?
     a = false

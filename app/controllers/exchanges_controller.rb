@@ -59,9 +59,9 @@ class ExchangesController < ApplicationController
         return
       end
     end
-
+    
     exchange_note = Message.new()
-    exchange_note.subject = "TRANSFER: " + @exchange.amount.to_s + " marbles - " + @req.name 
+    exchange_note.subject = "TRANSFER: " + @exchange.amount.to_s + " marbles - " + shorten(@req.name)
     exchange_note.content = "This is an automatically generated system notice. " + current_person.name + " has gifted you " + @exchange.amount.to_s + " marbles."
     exchange_note.sender = current_person
     exchange_note.recipient = @worker
