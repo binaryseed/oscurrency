@@ -5,6 +5,7 @@ tmp/restart.txt
 
 Capfile
 config/deploy.rb
+log/*log*
 log/*.log
 log/*.out
 log/*.pid
