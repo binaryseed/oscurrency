@@ -1,7 +1,7 @@
 <li class="req">
   <a name="req_<%= req.id %>"></a>
   <div class="profile-image">
-    <%= image_link req.person, :image => :thumbnail %>
+    <%= image_link req.person, :image => :thumbnail if params[:controller]!="people" %>
 	<% arrow_image = (req.offer? or req.exchange?) ? "icons/arrow_left.gif" : "icons/arrow_right.gif" %>
     <%= image_tag arrow_image, :class => "icon", :alt => "Request" %>
   </div>

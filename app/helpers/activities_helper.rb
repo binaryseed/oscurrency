@@ -9,7 +9,7 @@ module ActivitiesHelper
       blog = post.blog
       view_blog = blog_link("View #{h person.name}'s blog", blog)
       %(#{person_link(person)} made a blog post titled
-        #{post_link(blog, post)}.<br /> #{view_blog}.)
+        #{post_link(blog, post)}.)
     when "Comment"
       parent = activity.item.commentable
       parent_type = parent.class.to_s
@@ -22,7 +22,7 @@ module ActivitiesHelper
            blog post #{post_link(blog, post)}.)
       when "Person"
         %(#{person_link(activity.item.commenter)} commented on 
-          #{wall(activity)}.)
+          #{wall(activity)})
       when "Event"
         event = activity.item.commentable
         commenter = activity.item.commenter
@@ -37,33 +37,33 @@ module ActivitiesHelper
     when "ForumPost"
       post = activity.item
       %(#{person_link(person)} posted in the forum
-        #{topic_link(post.topic)}.)
+        #{topic_link(post.topic)})
     when "Topic"
       %(#{person_link(person)} created the new discussion topic
-        #{topic_link(activity.item)}.)
+        #{topic_link(activity.item)})
     when "Photo"
       %(#{person_link(person)}'s profile picture has changed.)
     when "Person"
       %(#{person_link(person)}'s description has changed.)
     when "Event"
       event = activity.item
-      %(#{person_link(person)} created a new event: #{event_link(event.title, event)}.)
+      %(#{person_link(person)} created a new event: #{event_link(event.title, event)})
     when "EventAttendee"
       event = activity.item.event
       %(#{person_link(person)} is attending #{someones(event.person, person)} event: 
-        #{event_link(event.title, event)}.) 
+        #{event_link(event.title, event)}) 
     when "Req"
       req = activity.item
       
       if req.offer?
-        %(#{person_link(person)} posted a new offer: #{offer_link(req.name, req)}.)
+        %(#{person_link(person)} posted a new offer: #{offer_link(req.name, req)})
       else
-        %(#{person_link(person)} posted a new request: #{req_link(req.name, req)}.)
+        %(#{person_link(person)} posted a new request: #{req_link(req.name, req)})
       end
       
     when "Exchange"
       exchange = activity.item
-      %(#{person_link(exchange.customer)} gave #{person_link(person)} #{exchange.amount}&nbsp;Marbles for #{req_link(exchange.req.name,exchange.req)}.)
+      %(#{person_link(exchange.customer)} gave #{person_link(person)} #{exchange.amount}&nbsp;Marbles for #{req_link(exchange.req.name,exchange.req)})
     else
       raise "Invalid activity type #{activity_type(activity).inspect}"
     end
@@ -76,7 +76,7 @@ module ActivitiesHelper
       post = activity.item
       blog = post.blog
       %(#{person_link(person)} made a
-        #{post_link("new blog post", blog, post)}.)
+        #{post_link("new blog post", blog, post)})
     when "Comment"
       parent = activity.item.commentable
       parent_type = parent.class.to_s
@@ -92,7 +92,7 @@ module ActivitiesHelper
           #{post_link("blog post", post.blog, post)}.)
       when "Person"
         %(#{person_link(activity.item.commenter)} commented on 
-          #{wall(activity)}.)
+          #{wall(activity)})
       when "Event"
         event = activity.item.commentable
         %(#{person_link(activity.item.commenter)} commented on 
@@ -128,7 +128,8 @@ module ActivitiesHelper
 
     when "Exchange"
       exchange = activity.item
-      %(#{person_link(person)} earned #{exchange.amount} Marbles for #{req_link(exchange.req.name,exchange.req)})
+      %(#{person_link(exchange.customer)} gave #{person_link(person)} #{exchange.amount}&nbsp;Marbles for #{req_link(exchange.req.name,exchange.req)})
+      #%(#{person_link(person)} earned #{exchange.amount} Marbles for #{req_link(exchange.req.name,exchange.req)})
     else
       raise "Invalid activity type #{activity_type(activity).inspect}"
     end

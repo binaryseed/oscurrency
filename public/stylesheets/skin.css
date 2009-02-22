@@ -820,3 +820,24 @@ body.register input.button
 }
  
  
+
+
+
+body.person li.req .col_content
+{
+   margin-left:0px;
+   width:525px;
+}
+body.person li.req img.icon
+{
+   position:relative;
+   right:0px;
+}
+body.person li.req div.profile-image
+{
+   width:20px;
+}
+body.person .col1 h2
+{
+   color:black;
+}
