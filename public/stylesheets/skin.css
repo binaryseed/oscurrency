@@ -445,12 +445,18 @@ ul.categories li ul li
     background:white;
 }
 
+.blankstate
+{
+    text-align:center;
+}
 
 
 
 /* label for activity type, show in categories/xx   */
 .req em
 {
+    color:#195BAC;
+    font-family:Georgia,Times,serif;
 }
 
 
@@ -496,6 +502,12 @@ blockquote p, .list blockquote p, .req blockquote p
     float:right;
     width:275px;    
 }
+.toolbox em
+{
+    font-weight:normal;
+    font-style:normal;
+    color:#1D6AC9;
+}
 
 
 p
@@ -537,6 +549,12 @@ p.formatting span
 * html .clearfix{height:1%}
 .clearfix{display:block}
 
+
+
+ul:after
+{
+clear:both;content:'.';display:block;visibility:hidden;height:0
+}
 
 
 .col2 a
@@ -790,3 +808,15 @@ body.register input.button
 
 
 
+#active_form
+{
+    float:none;
+    display:inline;
+    margin:0px;
+}
+#active_form div
+{
+    display:none;
+}
+ 
+ 

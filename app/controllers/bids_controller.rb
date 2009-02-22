@@ -197,7 +197,7 @@ class BidsController < ApplicationController
     @bid.approved_at = Time.now
     @bid.status_id = Bid::SATISFIED
     
-    if @req.isoffer
+    if @req.offer?
       Account.transfer(@bid.person.account,@req.person.account,@bid.estimated_hours,@req)
     else
       Account.transfer(@req.person.account,@bid.person.account,@bid.estimated_hours,@req)
@@ -207,7 +207,7 @@ class BidsController < ApplicationController
       flash[:notice] = 'Work marked verified. Approval notification sent'
       bid_note = Message.new()
       bid_note.subject = "BID: Verified - " + @req.name + " (#{@bid.estimated_hours} marbles earned)" # XXX make sure length does not exceed 40 chars
-      if @req.isoffer
+      if @req.offer?
         bid_note.content = "#{@bid.person.name} has verified your work for <a href=\"" + req_path(@req) + "\">#{@bid.person.name}</a>. This is an automated message"
         bid_note.sender = @bid.person
         bid_note.recipient = @req.person

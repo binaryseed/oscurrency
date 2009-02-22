@@ -5,7 +5,7 @@
     <h3 class="blankslate">No offers (yet!)</h3>
 <%- else -%>
   <ul class="list full">
-    <%= render :partial => 'req', :locals => {:short => true}, :collection => @reqs %>
+    <%= render :partial => 'reqs/req', :locals => {:short => true}, :collection => @reqs %>
   </ul>
 <%- end -%>
 <%- end -%>

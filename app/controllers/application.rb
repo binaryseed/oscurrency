@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   include ExceptionNotifiable
   
   before_filter :create_page_view, :require_activation, :tracker_vars,
-                :admin_warning
+                :admin_warning, :alert_messages
 
   ActiveScaffold.set_defaults do |config|
     config.ignore_columns.add [ :created_at, :updated_at ]
@@ -30,6 +30,10 @@ class ApplicationController < ActionController::Base
       logged_in? and ( current_person.active? or current_person.admin? )
     end
   private
+  
+    def alert_messages
+      flash[:notice] = "You have new messages waiting in your <a href='#{messages_path}'>Inbox</a>" if logged_in? and current_person.has_unread_messages?
+    end
 
     def admin_required
       unless current_person.admin?

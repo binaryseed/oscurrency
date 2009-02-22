@@ -1,7 +1,7 @@
-<h2>People Involved</h2>
+<h2>Friends Involved</h2>
 <ul class="list activity small">
   <%- if category.people.empty? -%>
-  <h3 class="blankstate">No providers (yet!)</h3>
+  <h3 class="blankstate">No friends have joined yet</h3>
   <%- else -%>
   <%= render :partial => 'person', :collection => category.people %>
   <%- end -%>

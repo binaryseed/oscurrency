@@ -1,9 +1,10 @@
-<h2><%= global_prefs.app_name %></h2>
-<%- column_div :type => :primary do -%>
 <%- unless global_prefs.app_name.blank? -%>
+	<h2><%= global_prefs.app_name %></h2>
 <%- else -%>
-<h2><%= Blog %></h2>
+	<h2><%= Blog %></h2>
 <%- end -%>
+
+<%- column_div :type => :primary do -%>
 
   <%- if @posts.empty? -%>
     <h3 class="blankslate">
@@ -40,7 +41,10 @@
 	
 	
 	    <%- if !logged_in? -%>
-
+								  <div class="status-btn">
+								    <input type="button" value="sign up"  class="round-btn" onclick="document.location='<%= signup_path %>';" />
+								  </div>
+								
 								  <h2>login</h2>
 
 								  <% form_tag session_path do -%>

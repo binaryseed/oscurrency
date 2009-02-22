@@ -4,7 +4,16 @@
 #                                                    until status is
 %>
 
-<% if accepted_bid.req.isoffer %>
+
+<% if current_person?(accepted_bid.req.person) && accepted_bid.status_id < Bid::ACCEPTED -%>
+  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put} do |f| %>
+    <%= f.hidden_field :status_id, :value => Bid::ACCEPTED %>
+    <%= f.submit "Accept" %>
+  <% end -%>
+<% end -%>
+
+
+<% if accepted_bid.req.offer? %>
 
 	<% if current_person?(accepted_bid.req.person) && accepted_bid.status_id < Bid::COMPLETED && accepted_bid.status_id >= Bid::ACCEPTED -%>
 	  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put} do |f| %>

@@ -1,11 +1,10 @@
 <%- column_div :type => :primary do -%>
-  <h2><%=h @category.long_name %></h2>
+  <h2>SkillBank: <%=h @category.long_name %></h2>
   <%- if @reqs.empty? -%>
-    <h3 class="blankstate">No activity (yet!)</h3>
+    <h3 class="blankstate">No active Requests or Offers</h3>
   <%- else -%>
 
 
-  <h3>Activity</h3>
   <ul class="list full">
     <%= render :partial => 'reqs/req', :collection => @reqs, :locals => {:show_type => true} %>
   </ul>

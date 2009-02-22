@@ -1,12 +1,12 @@
 <li class="topic">
   <a name="topic_<%= topic.id %>"></a>
   <div class="profile-image">
-    <%= image_link topic.person, :image => :thumbnail %>
-    <%= image_tag "icons/clipboard.gif", :class => "icon", :alt => "Topic" %>
+    <!-- <%= image_link topic.person, :image => :thumbnail %> -->
   </div>
-<div class="col_content">
+<div class="col_content" style="margin-left:55px">
   <p>
   <%- n = topic.posts.count -%>
+    <%= image_tag "icons/clipboard.gif", :class => "icon", :alt => "Topic" %>
   <%= link_to h(topic.name), 
               forum_topic_path(topic.forum, topic, :posts => n),
               :class => "show-follow" %>

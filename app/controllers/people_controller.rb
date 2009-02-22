@@ -35,7 +35,7 @@ class PeopleController < ApplicationController
     @body = "register single-col"
     @body = @body + " yui-skin-sam"
     @person = Person.new
-    @all_categories = Category.find(:all, :order => "parent_id, name").sort_by { |a| a.long_name }
+    @all_categories = Category.find(:all, :conditions => "parent_id is NULL", :order => "parent_id, name").sort_by { |a| a.long_name }
     respond_to do |format|
       format.html
     end

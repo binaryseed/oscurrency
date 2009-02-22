@@ -8,8 +8,8 @@ class ReqsController < ApplicationController
   # GET /reqs
   # GET /reqs.xml
   def index
-    @reqs = Req.find(:all, :conditions => "active = 1 AND isoffer=false", :order => 'created_at DESC')
-                                                          # don't include offers 
+   @reqs = Req.find(:all, :conditions => "active = 1 AND isoffer=false", :order => 'created_at DESC')
+                                               # don't include offers 
 
     respond_to do |format|
       format.html # index.html.erb
@@ -106,7 +106,7 @@ class ReqsController < ApplicationController
   def correct_person_and_no_accept_required
     request = Req.find(params[:id])
     redirect_to home_url unless request.person == current_person
-    redirect_to home_url if request.has_accepted_bid?
+    # redirect_to home_url if request.has_accepted_bid?
   end
 
   def correct_person_and_no_commitment_required

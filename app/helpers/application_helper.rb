@@ -4,7 +4,7 @@ module ApplicationHelper
   ## Menu helpers
   
   def menu
-    home     = menu_element("blog",   home_path)
+    home     = menu_element("home",   home_path)
     categories = menu_element("SkillBank", categories_path)
     people   = menu_element("friends", people_path)
     if Forum.count == 1
@@ -18,13 +18,13 @@ module ApplicationHelper
       offers = menu_element("Offers", offers_path)
       requests = menu_element("Requests", reqs_path)
       messages = menu_element("inbox", messages_path)
-#      blog     = menu_element("Blog",     blog_path(current_person.blog))
+      # blog     = menu_element("Blog",     blog_path(admin.blog))
       # photos   = menu_element("Photos",   photos_path)
 #      contacts = menu_element("Contacts",
 #                              person_connections_path(current_person))
 #      links = [home, profile, contacts, messages, blog, people, forum]
       events   = menu_element("events", events_path)
-      links = [ profile, people, categories, offers, requests, messages, forum, events, home]
+      links = [ profile, people, categories, offers, requests, messages, forum, events]
 
       
     elsif logged_in? and admin_view?
@@ -48,7 +48,7 @@ module ApplicationHelper
         links.push(menu_element("Steps", steps_url))
       end
       if !global_prefs.memberships.blank?
-        links.push(menu_element("Joining", memberships_url))
+        links.push(menu_element("Membership", memberships_url))
       end
       if !global_prefs.questions.blank?
         links.push(menu_element("Questions", questions_url))
@@ -135,7 +135,7 @@ module ApplicationHelper
   def volume_link(person, options = {})
     path = person_path(person)
     img = image_tag("icons/bargraph.gif")
-    action = "Net Activity: #{person.net_activity} marbles"
+    action = "Net Activity: <em>#{person.net_activity} marbles</em>"
     opts = {}
     str = link_to(img,path, opts)
     str << "&nbsp;"
@@ -145,7 +145,7 @@ module ApplicationHelper
   def account_link(person, options = {})
     path = person_path(person) # XXX link to transactions
     img = image_tag("icons/shopping_cart.gif")
-    action = "Balance: #{person.account.balance} marbles"
+    action = "Balance: <em>#{person.account.balance} marbles</em>"
     opts = {}
     str = link_to(img,path, opts)
     str << "&nbsp;"
@@ -156,7 +156,7 @@ module ApplicationHelper
     img = image_tag("icons/switch.gif")
     path = new_person_exchange_path(person)
     opts = {}
-    action = "Give marbles"
+    action = "Gift Marbles"
     str = link_to(img,path,opts)
     str << "&nbsp;"
     str << link_to_unless_current(action, path, opts)
@@ -327,7 +327,11 @@ end
     end
     
     def shorten(str,len=50)
-      str.slice(0,len).gsub(/(\s\S+)$/,"").strip.concat("...")
+      if str
+        str.slice(0,len).gsub(/(\s\S+)$/,"").strip.concat("...")
+      else 
+        ""
+      end
     end
     
     # Return true if the text *doesn't* start with a paragraph tag.

@@ -10,15 +10,7 @@
 	<% end %>
 
   </div>
-    <% if current_person?(bid.req.person) && bid.status_id < Bid::ACCEPTED # && !bid.req.has_accepted_bid? 
-	-%>
-      <% form_for :bid, :url => req_bid_path(bid.req, bid), :html => {:method => :put} do |f| %>
-        <%= f.hidden_field :status_id, :value => Bid::ACCEPTED %>
-        <%= f.submit "Accept" %>
-      <% end -%>
-    <% end -%>
 
-    <%= render :partial => "shared/accepted_bid", :object => bid %>
 
   <p>
   Marble bid: <%= h bid.estimated_hours %> <span class="meta">Expires <%= relative_time_ago_in_words(bid.expiration_date) %></span>
@@ -27,6 +19,7 @@
   <p>
   	<%= h bid.description %>
   </p>
+  <%= render :partial => "shared/accepted_bid", :object => bid %>
   <p class="meta">
 	
     <% if bid.approved? %>

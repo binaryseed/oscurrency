@@ -2,25 +2,31 @@
   <a name="req_<%= req.id %>"></a>
   <div class="profile-image">
     <%= image_link req.person, :image => :thumbnail %>
-    <%= image_tag "icons/arrow_right.gif", :class => "icon", :alt => "Request" %>
+	<% arrow_image = (req.offer? or req.exchange?) ? "icons/arrow_left.gif" : "icons/arrow_right.gif" %>
+    <%= image_tag arrow_image, :class => "icon", :alt => "Request" %>
   </div>
-  <% # disable - rendered with each bid now
-     if false && req.has_accepted_bid? %>
-    <%= render :partial => "shared/accepted_bid", :object => req.accepted_bid %>
-  <% end -%>
   <p>
 	
-	<% if req.isoffer %>
-		<%= "<em>Offer:</em> " if defined? show_type %>
+	<% if req.offer? %>
+		<%= "<em>Offer:</em> " if ["categories"].include? params[:controller] %>
 		<%= link_to h(req.name), {:controller =>"offers",:action =>req.id}, :class => "show-follow" %>
+	<% elsif req.exchange? %>
+		<%= "<em>Exchange:</em> " if ["categories"].include? params[:controller] %>
+		<%= link_to h(req.name), req, :class => "show-follow" %>
 	<% else %>
-		<%= "<em>Request:</em> " if defined? show_type %>
+		<%= "<em>Request:</em> " if ["categories"].include? params[:controller] %>
 		<%= link_to h(req.name), req, :class => "show-follow" %>
 	<% end %>
 	
+	<% if req.active %>
+		(<%= h req.estimated_hours %> Marbles)
+	    <span class="meta">Due: <%= relative_time_ago_in_words(req.due_date) %></span>
+	<% else %>		
+	<% end %>
 	
-	(<%= h req.estimated_hours %> Marbles)
-    <span class="meta">Due: <%= relative_time_ago_in_words(req.due_date) %></span>
+
+	
+
   </p>
 <div class="col_content">
   <p class="meta">
@@ -29,34 +35,53 @@
 
   </p>
   <p>
-    <% if defined? short %>
+	
+	<% if req.exchange? %>
+	  <%= "#{req.estimated_hours} Marbles given to #{person_link req.given_to}" %>
+	<% end %>
+		
+    <% if params[:action] == "index" %>
 	      <%= display shorten(req.description, 100) %>
 	<% else %>
     	  <%= display req.description %>
 	<% end %>
   </p>
-  <p class="meta">
-	<% # disabled - rendered with each bid now
-	%>
-    <% if false && req.has_approved? %><%= approved_message(req) %><br><% end -%>
-    <% if false && req.has_completed? %><%= completed_message(req) %><br><% end -%>
-    <% if false && req.has_commitment? %><%= commitment_message(req) %><br><% end -%>
-    <% if false && req.has_accepted_bid? %><%= accepted_message(req) %><br><% end -%>
+
+   <br />
+  <span class="meta">
 
     Posted by <%= person_link req.person %>
     <%= time_ago_in_words(req.created_at) %> ago
-    <% if current_person?(req.person) -%>
+
+
+    <% if current_person?(req.person) && !req.active && !req.exchange?-%>
+     | 
+		  <% form_for :req,  :url => req_path(req), :html => {:id => "active_form", :method => :put} do |f| %>
+		    <%= f.hidden_field :active, :value => 1 %>
+			<%= link_to_function "Activate", "document.getElementById('active_form').submit()" %>
+		  <% end -%>
+   <% end -%>
+
+    <% if current_person?(req.person) && req.active && !req.exchange? -%>
+     | 
+		  <% form_for :req,  :url => req_path(req), :html => {:id => "active_form", :method => :put} do |f| %>
+		    <%= f.hidden_field :active, :value => 0 %>
+			<%= link_to_function "Deactivate", "document.getElementById('active_form').submit()" %>
+		  <% end -%>
+   <% end -%>
+
+    <% if current_person?(req.person)  && !req.exchange? -%>
      | <%= link_to "Edit", edit_req_path(req) #unless req.has_accepted_bid?
       %>
     <% end -%>
-    <% if admin? || current_person?(req.person) -%>
+
+
+    <% if admin? || current_person?(req.person)  && !req.exchange? -%>
       | <%= link_to "Delete", req, :confirm => 'Are you sure?', :method => :delete #unless (req.has_commitment? || req.has_approved?) 
       %>
     <% end -%>
-    <br>
-    <% if false && !current_person.address.nil? && !req.person.address.nil? && !current_person?(req.person) -%>
-      <%= number_with_precision(req.person.address.distance_to(current_person.address)).to_s %> miles away
-    <% end -%>
-  </p>
+
+
+  </span>
 </div>
 </li>

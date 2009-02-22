@@ -36,7 +36,7 @@ module ActivitiesHelper
         have connected.)
     when "ForumPost"
       post = activity.item
-      %(#{person_link(person)} made a post on the forum topic
+      %(#{person_link(person)} posted in the forum
         #{topic_link(post.topic)}.)
     when "Topic"
       %(#{person_link(person)} created the new discussion topic
@@ -47,7 +47,7 @@ module ActivitiesHelper
       %(#{person_link(person)}'s description has changed.)
     when "Event"
       event = activity.item
-      %(#{person_link(person)} has created a new event: #{event_link(event.title, event)}.)
+      %(#{person_link(person)} created a new event: #{event_link(event.title, event)}.)
     when "EventAttendee"
       event = activity.item.event
       %(#{person_link(person)} is attending #{someones(event.person, person)} event: 
@@ -55,15 +55,15 @@ module ActivitiesHelper
     when "Req"
       req = activity.item
       
-      if req.isoffer
-        %(#{person_link(person)} has posted a new offer: #{offer_link(req.name, req)}.)
+      if req.offer?
+        %(#{person_link(person)} posted a new offer: #{offer_link(req.name, req)}.)
       else
-        %(#{person_link(person)} has made a new request: #{req_link(req.name, req)}.)
+        %(#{person_link(person)} posted a new request: #{req_link(req.name, req)}.)
       end
       
     when "Exchange"
       exchange = activity.item
-      %(#{person_link(person)} earned #{exchange.amount} Marbles for #{req_link(exchange.req.name,exchange.req)}.)
+      %(#{person_link(exchange.customer)} gave #{person_link(person)} #{exchange.amount}&nbsp;Marbles for #{req_link(exchange.req.name,exchange.req)}.)
     else
       raise "Invalid activity type #{activity_type(activity).inspect}"
     end
@@ -103,34 +103,32 @@ module ActivitiesHelper
         have connected.)
     when "ForumPost"
       topic = activity.item.topic
-      %(#{person_link(person)} made a post on the forum #{topic_link(topic)}.)
-      # %(#{person_link(person)} made a post on the forum topic
-      #   #{topic_link(post.topic)}.)
+      %(#{person_link(person)} posted in the forum #{topic_link(topic)})
       
     when "Topic"
       %(#{person_link(person)} created a 
-        #{topic_link("new discussion topic", activity.item)}.)
+        #{topic_link("new discussion topic", activity.item)})
     when "Photo"
       %(#{person_link(person)}'s profile picture has changed.)
     when "Person"
       %(#{person_link(person)}'s description has changed.)
     when "Event"
-      %(#{person_link(person)} has created a new #{event_link("event", activity.item)}.)
+      %(#{person_link(person)} has created a new #{event_link("event", activity.item)})
     when "EventAttendee"
       event = activity.item.event
-      %(#{person_link(person)} is attending #{someones(event.person, person)} #{event_link("event", event)}.)
+      %(#{person_link(person)} is attending #{someones(event.person, person)} #{event_link("event", event)})
     when "Req"
       req = activity.item
       
-      if req.isoffer
-        %(#{person_link(person)} has posted a new offer: #{offer_link(req.name, req)}.)
+      if req.offer?
+        %(#{person_link(person)} posted a new offer: #{offer_link(req.name, req)})
       else
-        %(#{person_link(person)} has made a new request: #{req_link(req.name, req)}.)
+        %(#{person_link(person)} posted a new request: #{req_link(req.name, req)})
       end
 
     when "Exchange"
       exchange = activity.item
-      %(#{person_link(person)} earned #{exchange.amount} Marbles for #{req_link(exchange.req.name,exchange.req)}.)
+      %(#{person_link(person)} earned #{exchange.amount} Marbles for #{req_link(exchange.req.name,exchange.req)})
     else
       raise "Invalid activity type #{activity_type(activity).inspect}"
     end
@@ -166,7 +164,7 @@ module ActivitiesHelper
             when "EventAttendee"
               "time.gif"
             when "Req"
-              if activity.item.isoffer
+              if activity.item.offer?
                 "arrow_left.gif"
               else
                 "arrow_right.gif"

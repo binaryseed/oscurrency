@@ -59,8 +59,26 @@
   background-color: black;
 }
 .weekendDay {
-  background-color: #ffffdd;
+  background-color: #eee;
 }
 .today{
   background-color: #4682b4;
 }
+
+
+
+.calendar a
+{
+    color:black;
+    text-decoration:underline;
+}
+.calendar a:hover
+{
+    text-decoration:none;
+}
+.calendar .nextMonth 
+{
+    text-align:right;
+}
+
+

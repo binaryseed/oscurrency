@@ -178,6 +178,18 @@ class Person < ActiveRecord::Base
     work = Exchange.find_all_by_worker_id(self).collect{|i|i.amount.to_i}.to_a
     cust.concat(work).inject{|sum,n|sum+n} || 0
   end
+  
+  def my_offers
+    reqs = Req.find_all_by_person_id(self, :conditions =>  "isoffer=true AND isexchange = false",
+                                           :order => 'created_at DESC'
+                                     )
+  end  
+  
+  def my_reqs
+    reqs = Req.find_all_by_person_id(self, :conditions =>  "isoffer=false AND isexchange = false",
+                                           :order => 'created_at DESC'
+                                     )
+  end
 
   ## Feeds
 
@@ -195,7 +207,7 @@ class Person < ActiveRecord::Base
 
   def recent_activity
     Activity.find_all_by_person_id(self, :order => 'created_at DESC',
-                                         :limit => 4)
+                                         :limit => 10)
   end
 
   ## For the home page...

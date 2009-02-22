@@ -1,9 +1,7 @@
 <%- unless @person.recent_activity.empty? -%>
-  <h2>Recent Exchanges</h2>
+  <h2 class='blue'>Recent Exchanges</h2>
   
-
-  
-  <ul class="list activity small">
+  <ul class="list activity small blue">
      <%= render :partial => 'shared/exchange',
                 :collection => @person.exchanges %>
   </ul>

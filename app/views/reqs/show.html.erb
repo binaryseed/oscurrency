@@ -3,8 +3,10 @@
 
 
 
-<% if @req.isoffer %>
+<% if @req.offer? %>
 	<h2>Offer</h2>
+<% elsif @req.exchange? %>
+    <h2>Exchange</h2>
 <% else %>
 	<h2>Request</h2>
 <% end %>
@@ -25,8 +27,7 @@
   </ul>
   <%- end -%>
 
-    <% unless ( current_person?(@req.person) ) #|| !@req.active ) 
-	-%>
+    <% unless ( current_person?(@req.person) || !@req.active ) -%>
       <h2>Make a Bid</h2>
 
       <%= error_messages_for :req %>
@@ -53,7 +54,7 @@
 
 <%- column_div :type => :secondary do -%>
 
-	<% if @req.isoffer %>
+	<% if @req.offer? %>
   		<%= render :partial => 'shared/add_offer_button' %>
 	  <%= render :partial => 'searches/box', :locals => {:search_type => "Offers",:search_model=>"Req"} %>
 	<% else %>

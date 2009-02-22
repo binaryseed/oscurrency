@@ -12,7 +12,23 @@ class Req < ActiveRecord::Base
   attr_protected :person_id, :created_at, :updated_at
   validates_presence_of :name, :due_date
   after_create :log_activity
+
+  def offer?
+    self.isoffer
+  end
+
+  def exchange?
+    # Exchange.find_by_req_id(self)
+    self.isexchange
+  end
   
+  def given_to
+    if self.exchange?
+      Person.find(Exchange.find_by_req_id(self).worker_id)
+    else
+      ""
+    end
+  end
 
   def has_approved?
     a = false
