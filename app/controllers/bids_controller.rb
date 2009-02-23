@@ -50,10 +50,10 @@ class BidsController < ApplicationController
 
     updated_bid = params[:bid]
     
-    # take care of the update that comes from bid/id/edit
+    # take care of the update that comes from bid/id/edit, or from thumbs up/down 
     if params[:content_update]
       if @bid.update_attributes!(params[:bid])
-        flash[:notice] = 'Bid successfully updated.'
+        flash[:success] = 'Bid successfully updated.'
       else
         flash[:error] = 'Error when updating bid.'
       end

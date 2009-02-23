@@ -18,6 +18,10 @@ class Bid < ActiveRecord::Base
   
   def accepted?
     status_id >= ACCEPTED
+  end 
+   
+  def alreadyaccepted?
+    status_id > ACCEPTED
   end
 
   def approved?
@@ -31,6 +35,37 @@ class Bid < ActiveRecord::Base
   def commitment?
     committed_at != nil
   end
-
+  
+  def confirmed?
+    status_id > COMPLETED
+  end
+  
+  def notaccepted?
+    status_id < ACCEPTED
+  end
+  
+  def notcompleted?
+    status_id < COMPLETED
+  end
+  
+  def notconfirmed?
+    status_id < SATISFIED
+  end
+  
+  def rated?
+    approval != nil
+  end
+  
+  def notrated?
+    approval == nil
+  end
+  
+  def thumbsup?
+    approval == true
+  end
+  
+  def thumbsdown?
+    approval == false
+  end
 
 end

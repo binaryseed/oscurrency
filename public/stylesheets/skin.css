@@ -733,8 +733,24 @@ li.bid input, .col1 #bid_submit, .col1 #req_submit, .col1 input.button, .col1 #e
     padding:6px;
 }
 
-
-
+li.bid form
+{
+    float:none;
+}
+li.bid label
+{
+    display:inline;
+    color:#195BAC;
+}
+li.bid .feedback
+{
+    color:#195BAC;
+    font-weight:bold;
+}
+li.bid .feedback img
+{
+    padding-right:4px;
+}
 
 
 
