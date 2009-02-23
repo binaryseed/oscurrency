@@ -1,0 +1,38 @@
+<%= render :partial => 'jscript', :locals => { :jscript_file_name => 'bid_form' } %>
+
+
+<%= error_messages_for :bid %>
+
+<%- column_div :type => :primary do -%>
+
+    <% unless (@bid.accepted?) %>
+
+		<h2>Edit Bid</h2>
+		
+		<% form_for :bid, :url => req_bid_path(@bid.req,@bid), :html => {:method => :put} do |f| %>
+		  <div class="form_row">
+		    <%= f.label :marbles %>
+		    <%= f.text_field :estimated_hours, :size => 8 %>
+		  </div>
+		  <div class="form_row">
+		    <%= f.label :expiration_date %>
+		    <%= f.text_field :expiration_date, :size => 8 %>
+		  </div>
+		  <div class="form_row">
+		    <%= f.label :comment %>
+		    <%= f.text_area :description, :rows => 4 %>
+		  </div>
+		  <div class="form_row">
+			<input type='hidden' name='content_update' value='true' />
+		    <%= f.submit "Update Bid" %>
+		  </div>
+		<% end %>
+		
+	<% end %>
+
+<% end %>
+
+
+<%- column_div :type => :secondary do -%>
+  <%= render :partial => 'shared/minifeed' %>
+<%- end -%>
