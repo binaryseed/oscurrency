@@ -737,6 +737,10 @@ li.bid form
 {
     float:none;
 }
+li.bid form.center
+{
+    text-align:center;
+}
 li.bid label
 {
     display:inline;
@@ -746,6 +750,7 @@ li.bid .feedback
 {
     color:#195BAC;
     font-weight:bold;
+    text-align:left;
 }
 li.bid .feedback img
 {

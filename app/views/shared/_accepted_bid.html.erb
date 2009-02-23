@@ -5,41 +5,41 @@
 %>
 
 <% if current_person?(accepted_bid.req.person) && accepted_bid.notaccepted? -%>
-  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put} do |f| %>
+  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put, :class => :center} do |f| %>
     <%= f.hidden_field :status_id, :value => Bid::ACCEPTED %>
     <%= f.submit "Accept" %>
   <% end -%>
 <% end -%>
 
 <% if accepted_bid.notconfirmed? %>
-		<% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put} do |f| %>
+		<% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put, :class => :center} do |f| %>
 
 			<% if accepted_bid.req.offer? %>																<!-- offer -->
 				<% if current_person?(accepted_bid.req.person) && 
 					        accepted_bid.notcompleted? && accepted_bid.accepted? -%>
-		
-				    <%= f.hidden_field :status_id, :value => ( accepted_bid.status_id + 1 ) %>
-				    <%= f.submit( accepted_bid.status_id == Bid::ACCEPTED ? "Commit to Offer" : "Click if done" ) %>
+						
+				    <%= f.hidden_field :status_id, :value => Bid::COMPLETED %>
+				    <%= f.submit "Mark Transaction Complete" %>
 		
 				<% elsif current_person?(accepted_bid.person) && 
-				            accepted_bid.alreadyaccepted? && accepted_bid.notconfirmed? -%>
+				            accepted_bid.accepted? && accepted_bid.notconfirmed? -%>
 		
 				    <%= f.hidden_field :status_id, :value => Bid::SATISFIED %>
-				    <%= f.submit "Confirm Complete" %>
+				    <%= f.submit "Confirm Transaction Complete" %>
 		
 				<% end -%>
 			<% else %>																						<!-- request -->
 				<% if current_person?(accepted_bid.person) && 
 					        accepted_bid.notcompleted? && accepted_bid.accepted? -%>
 		
-				    <%= f.hidden_field :status_id, :value => ( accepted_bid.status_id + 1 ) %>
-				    <%= f.submit( accepted_bid.status_id == Bid::ACCEPTED ? "Commit to Request" : "Click if done" ) %>
+				    <%= f.hidden_field :status_id, :value => Bid::COMPLETED %>
+				    <%= f.submit "Mark Transaction Complete" %>
 		
 				<% elsif current_person?(accepted_bid.req.person) && 
-				            accepted_bid.alreadyaccepted? && accepted_bid.notconfirmed? -%>
+				            accepted_bid.accepted? && accepted_bid.notconfirmed? -%>
 		
 				    <%= f.hidden_field :status_id, :value => Bid::SATISFIED %>
-				    <%= f.submit "Confirm Complete" %>
+				    <%= f.submit "Confirm Transaction Complete" %>
 		
 				<% end -%>
 			<% end %>
@@ -51,27 +51,17 @@
 
 <% if accepted_bid.confirmed? && accepted_bid.notrated?  -%>
 
-	<% if ((current_person?(accepted_bid.person) && accepted_bid.req.isoffer) || (current_person?(accepted_bid.req.person) && !accepted_bid.req.isoffer)) %>
+	<% if ((current_person?(accepted_bid.person) && accepted_bid.req.offer?) || (current_person?(accepted_bid.req.person) && !accepted_bid.req.offer?)) %>
 		  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put} do |f| %>
-			<input type='hidden' name='content_update' value='true' />
-	        <p>Please provide some Feedback:</p>
-		    <input id='thumbsup' type='radio' value="1" name="bid[approval]" /><label for='thumbsup'><img src='/images/thumbsup.gif' />Thumbs Up</label><br />
-		    <input id='thumbsdown' type='radio' value="0" name="bid[approval]" /><label for='thumbsdown'><img src='/images/thumbsdown.gif' />Thumbs Down</label><br />
-	        <%= f.text_area :feedback, :rows => 4 %>
-		    <%= f.submit "Submit Feedback" %>
+				<input type='hidden' name='content_update' value='true' />
+		        <p>Please provide some Feedback:</p>
+			    <input id='thumbsup_<%= accepted_bid.id %>' type='radio' value="1" name="bid[approval]" />
+				<label for='thumbsup_<%= accepted_bid.id %>'><img src='/images/thumbsup.gif' />Thumbs Up</label><br />
+			    <input id='thumbsdown_<%= accepted_bid.id %>' type='radio' value="0" name="bid[approval]" />
+				<label for='thumbsdown_<%= accepted_bid.id %>'><img src='/images/thumbsdown.gif' />Thumbs Down</label><br />
+		        <%= f.text_area :feedback, :rows => 4 %>
+			    <%= f.submit "Submit Feedback" %>
 		  <% end -%>
-	
-		  <!-- <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put, :class => :thumb_up} do |f| %>
-			<input type='hidden' name='content_update' value='true' />
-		    <%= f.hidden_field :approval, :value => 1 %>
-		    <%= f.submit "Thumbs Up" %>
-		  <% end -%>
-
-		  <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put, :class => :thumb_down} do |f| %>
-			<input type='hidden' name='content_update' value='true' />
-		    <%= f.hidden_field :approval, :value => 0 %>
-		    <%= f.submit "Thumbs Down" %>
-		  <% end -%> -->
 	<% end %>
 
 <% end -%>

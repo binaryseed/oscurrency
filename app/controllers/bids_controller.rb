@@ -77,10 +77,10 @@ class BidsController < ApplicationController
         @bid.accepted_at = Time.now
         @bid.status_id = Bid::ACCEPTED
         if @bid.save!
-          flash[:notice] = 'Bid accepted. Message sent to bidder to commit'
+          flash[:notice] = 'Bid accepted.'
           bid_note = Message.new()
           bid_note.subject = "BID: accepted - " + @req.name # XXX make sure length does not exceed 40 chars
-          bid_note.content = "See the <a href=\"" + req_path(@req) + "\">request</a> to commit to bid"
+          bid_note.content = "Please update the <a href='#{req_path(@req)}'>bid</a> when you have completed the transaction."
           bid_note.sender = @req.person
           bid_note.recipient = @bid.person
           bid_note.save!
@@ -106,11 +106,27 @@ class BidsController < ApplicationController
           flash[:error] = 'Nothing to see here. Move along'
         end
       else
-        if Bid::COMMITTED != status.to_i
-          flash[:error] = 'Unexpected state change'
-          logger.warn "Error. Bad state change: #{status}. expecting COMMITTED"
-          redirect_to(@req)
-          return
+        if Bid::COMPLETED == status.to_i
+
+                # allow transition from accepted -> completed
+                @bid.completed_at = Time.now
+                @bid.status_id = Bid::COMPLETED
+                if @bid.save!
+                  flash[:notice] = 'Work marked completed.'
+                  bid_note = Message.new()
+                  bid_note.subject = "BID: Work completed - " + @req.name # XXX make sure length does not exceed 40 chars
+                  bid_note.content = "Work completed for <a href='#{req_path(@req)}'>#{@req.name}</a>. Please confirm this transaction! This is an automated message"
+                  bid_note.sender = @bid.person
+                  bid_note.recipient = @req.person
+                  bid_note.save!
+                  redirect_to(@req)
+                  return
+                else
+                  # XXX bid not saved
+                  redirect_to(@req)
+                  return
+                end
+
         end
         @bid.committed_at = Time.now
         @bid.status_id = Bid::COMMITTED
@@ -224,19 +240,33 @@ class BidsController < ApplicationController
     end
 
     if @bid.save!
-      flash[:notice] = 'Work marked verified. Approval notification sent'
+      flash[:notice] = 'Work confirmed complete.'
+      
+      fbk_note = Message.new()
+      fbk_note.subject = "Please leave Feedback for #{@req.name}"
       bid_note = Message.new()
-      bid_note.subject = "BID: Verified - " + @req.name + " (#{@bid.estimated_hours} marbles earned)" # XXX make sure length does not exceed 40 chars
+      bid_note.subject = "BID: Completed - #{@req.name} (#{@bid.estimated_hours} marbles earned)" # XXX make sure length does not exceed 40 chars
+      
       if @req.offer?
-        bid_note.content = "#{@bid.person.name} has verified your work for <a href=\"" + req_path(@req) + "\">#{@bid.person.name}</a>. This is an automated message"
+        fbk_note.content = "You have paid <a href='#{person_path @req.person}'>#{@bid.estimated_hours}</a> Marbles. Please leave feedback for the exchange: <a href='#{req_path(@req)}'>#{@req.name}</a>. This is an automated message"
+        fbk_note.sender = @req.person
+        fbk_note.recipient = @bid.person
+        
+        bid_note.content = "<a href='#{person_path @bid.person}'>#{@bid.person.name}</a> has confirmed your work, and you have recieved payment. This is an automated message"
         bid_note.sender = @bid.person
         bid_note.recipient = @req.person
       else
-        bid_note.content = "#{@req.person.name} has verified your work for <a href=\"" + req_path(@req) + "\">#{@req.name}</a>. This is an automated message"
+        fbk_note.content = "You have paid <a href='#{person_path @bid.person}'>#{@bid.estimated_hours}</a> Marbles. Please leave feedback for the exchange: <a href='#{req_path(@req)}'>#{@req.name}</a>. This is an automated message"
+        fbk_note.sender = @bid.person
+        fbk_note.recipient = @req.person
+        
+        bid_note.content = "<a href='#{person_path @req.person}'>#{@req.person.name}</a> has confirmed your work. This is an automated message"
         bid_note.sender = @req.person
         bid_note.recipient = @bid.person
       end
+      
       bid_note.save!
+      fbk_note.save!
     else
       # XXX handle error
     end
