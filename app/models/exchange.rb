@@ -13,6 +13,7 @@ class Exchange < ActiveRecord::Base
 
   def log_activity
     add_activities(:item => self, :person => self.worker)
+    add_activities(:item => self, :person => self.customer)      # log an exchange under both people, so it shows on both their feeds
   end
 
   private

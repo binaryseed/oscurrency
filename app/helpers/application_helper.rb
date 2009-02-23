@@ -37,9 +37,17 @@ module ApplicationHelper
       links = [home, spam, people, forums, preferences]
     else
       #links = [home, people]
-      links = [home, categories]
+      login =    menu_element("login", home_path)
+      signup =    menu_element("signup", signup_path)
+      links = [login,signup]
+      if !global_prefs.questions.blank?
+        links.push(menu_element("Community Currency?", questions_url))
+      end
       if !global_prefs.about.blank?
-        links.push(menu_element("About", about_url))
+        links.push(menu_element("How does CEC work?", about_url))
+      end
+      if !global_prefs.memberships.blank?
+        links.push(menu_element("Membership Guidelines", memberships_url))
       end
       if !global_prefs.practice.blank?
         links.push(menu_element("Practice", practice_url))
@@ -47,15 +55,10 @@ module ApplicationHelper
       if !global_prefs.steps.blank?
         links.push(menu_element("Steps", steps_url))
       end
-      if !global_prefs.memberships.blank?
-        links.push(menu_element("Membership", memberships_url))
-      end
-      if !global_prefs.questions.blank?
-        links.push(menu_element("Questions", questions_url))
-      end
       if !global_prefs.contact.blank?
         links.push(menu_element("Contact", contact_url))
       end
+      links.push(categories)
     end
 
     links
@@ -156,7 +159,7 @@ module ApplicationHelper
     img = image_tag("icons/switch.gif")
     path = new_person_exchange_path(person)
     opts = {}
-    action = "Gift Marbles"
+    action = "Transfer Gift Marbles"
     str = link_to(img,path,opts)
     str << "&nbsp;"
     str << link_to_unless_current(action, path, opts)

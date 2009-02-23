@@ -34,6 +34,7 @@
    Submitted by <%= person_link bid.person %>
     <%= time_ago_in_words(bid.created_at) %> ago
     <% if admin? || current_person?(bid.person) -%>
+    | <%= link_to "Edit", edit_bid_path(bid) unless bid.accepted? %>
     | <%= link_to "Delete", req_bid_path(bid.req,bid), :confirm => 'Are you sure?', :method => :delete %>
     <% end -%>
     <br>

@@ -35,4 +35,11 @@ class Activity < ActiveRecord::Base
          :order => 'activities.created_at DESC',
          :limit => GLOBAL_FEED_SIZE)
   end
+  
+  def self.minifeed                                
+    global_feed.select { |a|               # only show one side of an exchange in the minifeed 
+        (a.item_type == "Exchange" && a.person != Exchange.find(a.item).customer) ? false : true
+    }
+  end
+  
 end

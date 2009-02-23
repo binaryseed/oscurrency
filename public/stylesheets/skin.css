@@ -465,6 +465,18 @@ ul.categories li ul li
     padding-right:30px;
 }
 
+#nav li.n-how
+{
+    width:150px;
+}
+#nav li.n-membership
+{
+    width:170px;
+}
+#nav li.n-community
+{
+    width:160px;
+}
 
 
 .bid p.description
@@ -840,4 +852,16 @@ body.person li.req div.profile-image
 body.person .col1 h2
 {
    color:black;
+}
+
+
+
+
+ol li
+{
+    list-style-type:upper-alpha;
+}
+ol ol li
+{
+    list-style-type:upper-roman;
 }

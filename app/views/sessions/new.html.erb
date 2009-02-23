@@ -1,7 +1,9 @@
 <%- column_div :type => :primary do -%>
 
-<img src="/images/marblehand.jpg" />
 
+<div class="status-btn">
+  <input type="button" value="sign up"  class="round-btn" onclick="document.location='<%= signup_path %>';" />
+</div>
 
 
 <%- end -%>
@@ -9,11 +11,9 @@
 
 <%- column_div :type => :secondary do -%>
 
-  <div class="status-btn">
-    <input type="button" value="sign up"  class="round-btn" onclick="document.location='<%= signup_path %>';" />
-  </div>
 
 
+<img src="/images/marblehand_sm.jpg" style="border:1px solid black;margin-left:-1px"/>
 
   <h2>login</h2>
 

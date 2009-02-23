@@ -3,7 +3,8 @@
 
   <ul class="list activity small blue">
      <%= render :partial => 'shared/activity',
-                :collection => @person.recent_activity,
-                :locals => { :destroy => (current_person? @person) } %>
+                :collection => @person.recent_activity
+              #  :locals => { :destroy => (current_person? @person) } 
+%>
   </ul>
 <%- end -%>

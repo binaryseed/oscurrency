@@ -8,8 +8,7 @@
   <%= error_messages_for :person %>
 
   <div class="desc-message">
-    <p>Welcome! have fun.</p>
-    <p class="meta">To prevent SPAM and other bad things from happening, we'll have to confirm your account before it becomes active.</p>
+    <p>To prevent SPAM and other bad things from happening,<br />we'll have to confirm your account before it becomes active.</p>
   </div>
 
   <% form_for @person do |f| -%>
@@ -43,16 +42,17 @@
                          :maxlength => Person::MAX_PASSWORD,
                          :value => "" %>
   
+<br /><br />
 <h3>Your Profile</h3>
-<p class="meta">This can be updated at any time</p>
+<p class="meta">This information can be updated at any time</p>
   <div class="form_row full">
-        <label for="person_categories">Select a few categories that best describe what you're into...
+        <label for="person_categories">Select a few categories<br />that describe what you're into...
         </label>
         <%= render :partial => "shared/select_categories", :locals => { :model_name => 'person' } %>
   </div>
   
   <div class="form_row">
-    <label for="person_description">Describe yourself a bit to everyone...
+    <label for="person_description">Create a profile for others to see...
     </label>
 
     <%= formatting_note %>

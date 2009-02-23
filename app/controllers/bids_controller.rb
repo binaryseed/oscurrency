@@ -1,6 +1,8 @@
 class BidsController < ApplicationController
   before_filter :login_required, :only => [:new,:edit,:create,:update,:destroy]
   before_filter :setup
+  
+  skip_before_filter :setup, :only => [:edit]
 
   # POST /bids
   # POST /bids.xml
@@ -34,6 +36,12 @@ class BidsController < ApplicationController
       end
     end
   end
+  
+  # GET /bids/1/edit
+  def edit
+    @bid = Bid.find(params[:id])
+    @req = @bid.req
+  end
 
   # PUT /bids/1
   # PUT /bids/1.xml
@@ -41,6 +49,18 @@ class BidsController < ApplicationController
     @bid = Bid.find(params[:id])
 
     updated_bid = params[:bid]
+    
+    # take care of the update that comes from bid/id/edit
+    if params[:content_update]
+      if @bid.update_attributes!(params[:bid])
+        flash[:notice] = 'Bid successfully updated.'
+      else
+        flash[:error] = 'Error when updating bid.'
+      end
+      redirect_to(@req)
+      return
+    end
+    
     status = updated_bid[:status_id]
 
     case @bid.status_id

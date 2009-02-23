@@ -63,7 +63,7 @@ module ActivitiesHelper
       
     when "Exchange"
       exchange = activity.item
-      %(#{person_link(exchange.customer)} gave #{person_link(person)} #{exchange.amount}&nbsp;Marbles for #{req_link(exchange.req.name,exchange.req)})
+      %(#{person_link(exchange.customer)} gave #{person_link(exchange.worker)} #{exchange.amount}&nbsp;Marbles for #{req_link(exchange.req.name,exchange.req)})
     else
       raise "Invalid activity type #{activity_type(activity).inspect}"
     end
@@ -128,8 +128,7 @@ module ActivitiesHelper
 
     when "Exchange"
       exchange = activity.item
-      %(#{person_link(exchange.customer)} gave #{person_link(person)} #{exchange.amount}&nbsp;Marbles for #{req_link(exchange.req.name,exchange.req)})
-      #%(#{person_link(person)} earned #{exchange.amount} Marbles for #{req_link(exchange.req.name,exchange.req)})
+      %(#{person_link(exchange.customer)} gave #{person_link(exchange.worker)} #{exchange.amount}&nbsp;Marbles for #{req_link(exchange.req.name,exchange.req)})
     else
       raise "Invalid activity type #{activity_type(activity).inspect}"
     end
