@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_filter :setup
   skip_before_filter :require_activation
   
   def index
@@ -27,4 +28,13 @@ class HomeController < ApplicationController
   
   def dashboard
   end
+  
+  
+  private
+  
+    def setup
+      @body = "home"
+    end
+    
+    
 end

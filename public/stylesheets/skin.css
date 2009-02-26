@@ -467,7 +467,7 @@ ul.categories li ul li
 
 #nav li.n-how
 {
-    width:150px;
+    width:127px;
 }
 #nav li.n-membership
 {
@@ -475,7 +475,7 @@ ul.categories li ul li
 }
 #nav li.n-community
 {
-    width:160px;
+    width:190px;
 }
 
 
@@ -767,7 +767,6 @@ li.bid .feedback img
 }
 .login div.col1 img
 {
-    margin:23px 0px;
 }
 .login label.checkbox, .blog div.col2 label.checkbox
 {
@@ -886,3 +885,97 @@ ol ol li
 {
     list-style-type:upper-roman;
 }
+
+
+
+
+
+
+
+
+
+
+
+body.home h3
+{
+    text-transform:none;
+    margin-top:17px;
+}
+body.home p
+{
+    font-size:15px;
+    text-indent:20px;
+}
+body.home li p
+{
+    text-indent:0px;
+}
+body.home blockquote
+{
+    color:#222;
+    font-style:normal;
+    width:650px;
+    margin:0px auto;
+}
+body.home blockquote p
+{
+    font-size:19px;
+}
+
+
+
+
+body.login .col1
+{
+    width:auto;
+    float:none;
+}
+body.login h1
+{
+    font-size:23px;
+    text-align:center;
+    font-family:Georgia,Times,serif;
+    margin-bottom:10px;
+    line-height:1.4em;
+    margin-top:15px;
+    color:black;    
+}
+body.login h1 .name
+{
+    font-size:14px;
+    color:#999;
+}
+body.login h2
+{
+    background:white;
+    border:1px;
+    margin-top:38px;
+    color:black;
+}
+body.login hr
+{
+    border:0px;
+    border-top:1px solid #ddd;
+    width: 800px;
+    margin:0px auto;
+    margin-bottom:20px;
+    z-index:5;
+}
+body.login #center
+{
+    text-align:center;
+    position:relative;
+    z-index:5;
+    top:-315px;
+    line-height:1.7em;
+    font-size:20px;
+}
+body.login img.flow
+{
+    z-index:-5;
+    text-align:center;
+}
+
+
+
+

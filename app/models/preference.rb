@@ -1,20 +1,29 @@
 # == Schema Information
-# Schema version: 28
+# Schema version: 20090223070356
 #
 # Table name: preferences
 #
-#  id                  :integer(11)     not null, primary key
-#  domain              :string(255)     default(""), not null
-#  smtp_server         :string(255)     default(""), not null
-#  email_notifications :boolean(1)      not null
-#  email_verifications :boolean(1)      not null
-#  created_at          :datetime        
-#  updated_at          :datetime        
-#  analytics           :text            
-#  server_name         :string(255)     
-#  app_name            :string(255)     
-#  about               :text            
-#  demo                :boolean(1)      
+#  id                        :integer(4)      not null, primary key
+#  domain                    :string(255)     default(""), not null
+#  smtp_server               :string(255)     default(""), not null
+#  email_notifications       :boolean(1)      not null
+#  email_verifications       :boolean(1)      not null
+#  created_at                :datetime        
+#  updated_at                :datetime        
+#  analytics                 :text            
+#  server_name               :string(255)     
+#  app_name                  :string(255)     
+#  about                     :text            
+#  demo                      :boolean(1)      
+#  whitelist                 :boolean(1)      
+#  gmail                     :string(255)     
+#  exception_notification    :string(255)     
+#  registration_notification :boolean(1)      
+#  practice                  :text            
+#  steps                     :text            
+#  questions                 :text            
+#  memberships               :text            
+#  contact                   :text            
 #
 
 class Preference < ActiveRecord::Base

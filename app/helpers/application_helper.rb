@@ -37,14 +37,15 @@ module ApplicationHelper
       links = [home, spam, people, forums, preferences]
     else
       #links = [home, people]
-      login =    menu_element("login", home_path)
+      login =    menu_element("home", home_path)
       signup =    menu_element("signup", signup_path)
-      links = [login,signup]
+      links = [login]
+      links.push(categories)
       if !global_prefs.questions.blank?
-        links.push(menu_element("Community Currency?", questions_url))
+        links.push(menu_element("Community Currency Primer", questions_url))
       end
       if !global_prefs.about.blank?
-        links.push(menu_element("How does CEC work?", about_url))
+        links.push(menu_element("How CEC Works", about_url))
       end
       if !global_prefs.memberships.blank?
         links.push(menu_element("Membership Guidelines", memberships_url))
@@ -58,7 +59,7 @@ module ApplicationHelper
       if !global_prefs.contact.blank?
         links.push(menu_element("Contact", contact_url))
       end
-      links.push(categories)
+      links.push(signup)
     end
 
     links
