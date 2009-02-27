@@ -332,7 +332,11 @@ end
     
     def shorten(str,len=50)
       if str
-        str.slice(0,len).gsub(/(\s\S+)$/,"").strip.concat("...")
+        if str.length>50
+          str.slice(0,len).gsub(/(\s\S+)$/,"").strip.concat("...")
+        else 
+          str
+        end
       else 
         ""
       end

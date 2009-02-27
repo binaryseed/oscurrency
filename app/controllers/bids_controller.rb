@@ -21,7 +21,8 @@ class BidsController < ApplicationController
       if @bid.save
         bid_note = Message.new()
         bid_note.subject = "BID: " + @bid.estimated_hours.to_s + " marbles - " + @req.name 
-        bid_note.content = "See your <a href=\"" + req_path(@req) + "\">request</a> to consider bid"
+        bid_note.content = "See your <a href=\"" + req_path(@req) + "\">offer</a> to consider the bid" if @req.offer?
+        bid_note.content = "See your <a href=\"" + req_path(@req) + "\">request</a> to consider the bid" if !@req.offer?
         bid_note.sender = @bid.person
         bid_note.recipient = @req.person
         bid_note.save!
@@ -63,7 +64,7 @@ class BidsController < ApplicationController
     
     status = updated_bid[:status_id]
 
-    case @bid.status_id
+    case @bid.status_id                                               # based on what status in DB is, not whats in params[]
     when Bid::OFFERED
       unless current_person?(@req.person)
         flash[:error] = 'Nothing to see here. Move along'
@@ -91,59 +92,61 @@ class BidsController < ApplicationController
         end
       end
     when Bid::ACCEPTED
-      unless current_person?(@bid.person)    or current_person?(@req.person)
-        if current_person?(@req.person)      or current_person?(@bid.person)
-          # check for approval
-          if Bid::SATISFIED != status.to_i
-            flash[:error] = 'Unexpected state change'
-            logger.warn "Error. Bad state change: #{status}. expecting satisfied"
+      # unless current_person?(@bid.person)    or current_person?(@req.person)
+        # if current_person?(@req.person)      or current_person?(@bid.person)
+        #   # check for approval
+        #   if Bid::SATISFIED != status.to_i
+        #     flash[:error] = 'Unexpected state change'
+        #     logger.warn "Error. Bad state change: #{status}. expecting satisfied"
+        #     redirect_to(@req)
+        #     return
+        #   end
+        #   process_approval
+        #   redirect_to(@req)
+        # else
+        #   flash[:error] = 'Nothing to see here. Move along'
+        # end
+      # else
+      
+    if current_person?(@req.person)      or current_person?(@bid.person)
+      
+      
+        if Bid::SATISFIED == status.to_i
+            process_approval
             redirect_to(@req)
             return
-          end
-          process_approval
-          redirect_to(@req)
-        else
-          flash[:error] = 'Nothing to see here. Move along'
         end
-      else
+        
         if Bid::COMPLETED == status.to_i
-
-                # allow transition from accepted -> completed
-                @bid.completed_at = Time.now
-                @bid.status_id = Bid::COMPLETED
-                if @bid.save!
-                  flash[:notice] = 'Work marked completed.'
-                  bid_note = Message.new()
-                  bid_note.subject = "BID: Work completed - " + @req.name # XXX make sure length does not exceed 40 chars
-                  bid_note.content = "Work completed for <a href='#{req_path(@req)}'>#{@req.name}</a>. Please confirm this transaction! This is an automated message"
+              # allow transition from accepted -> completed
+              @bid.completed_at = Time.now
+              @bid.status_id = Bid::COMPLETED
+              if @bid.save!
+                flash[:notice] = 'Work marked completed.'
+                bid_note = Message.new()
+                bid_note.subject = "BID: Work completed - " + @req.name # XXX make sure length does not exceed 40 chars
+                bid_note.content = "Work completed for <a href='#{req_path(@req)}'>#{@req.name}</a>. Please confirm this transaction! This is an automated message"
+                
+                if @req.offer?
+                  bid_note.sender = @req.person
+                  bid_note.recipient = @bid.person
+                else
                   bid_note.sender = @bid.person
                   bid_note.recipient = @req.person
-                  bid_note.save!
-                  redirect_to(@req)
-                  return
-                else
-                  # XXX bid not saved
-                  redirect_to(@req)
-                  return
                 end
-
+                
+                bid_note.save!
+                redirect_to(@req)
+                return
+              else
+                # XXX bid not saved
+                redirect_to(@req)
+                return
+              end
         end
-        @bid.committed_at = Time.now
-        @bid.status_id = Bid::COMMITTED
-        if @bid.save!
-          flash[:notice] = 'Bid committed. Notification sent to requestor'
-          bid_note = Message.new()
-          bid_note.subject = "BID: committment - " + @req.name # XXX make sure length does not exceed 40 chars
-          bid_note.content = "Commitment made for your <a href=\"" + req_path(@req) + "\">request</a>. This is an automated message"
-          bid_note.sender = @bid.person
-          bid_note.recipient = @req.person
-          bid_note.save!
-          redirect_to(@req)
-        else
-          # XXX bid not saved
-          redirect_to(@req)
-        end
-      end
+        
+    end
+      
     when Bid::COMMITTED
       unless current_person?(@bid.person)       or current_person?(@req.person)
         if current_person?(@req.person)         or current_person?(@bid.person)
@@ -243,12 +246,12 @@ class BidsController < ApplicationController
       flash[:notice] = 'Work confirmed complete.'
       
       fbk_note = Message.new()
-      fbk_note.subject = "Please leave Feedback for #{@req.name}"
+      fbk_note.subject = "BID: Completed - Please leave Feedback for #{@req.name}"
       bid_note = Message.new()
       bid_note.subject = "BID: Completed - #{@req.name} (#{@bid.estimated_hours} marbles earned)" # XXX make sure length does not exceed 40 chars
       
       if @req.offer?
-        fbk_note.content = "You have paid <a href='#{person_path @req.person}'>#{@bid.estimated_hours}</a> Marbles. Please leave feedback for the exchange: <a href='#{req_path(@req)}'>#{@req.name}</a>. This is an automated message"
+        fbk_note.content = "You have paid <a href='#{person_path @req.person}'>#{@req.person.name}</a> #{@bid.estimated_hours} Marbles. Please leave feedback for the exchange: <a href='#{req_path(@req)}'>#{@req.name}</a>. This is an automated message"
         fbk_note.sender = @req.person
         fbk_note.recipient = @bid.person
         
@@ -256,7 +259,7 @@ class BidsController < ApplicationController
         bid_note.sender = @bid.person
         bid_note.recipient = @req.person
       else
-        fbk_note.content = "You have paid <a href='#{person_path @bid.person}'>#{@bid.estimated_hours}</a> Marbles. Please leave feedback for the exchange: <a href='#{req_path(@req)}'>#{@req.name}</a>. This is an automated message"
+        fbk_note.content = "You have paid <a href='#{person_path @bid.person}'>#{@bid.person.name}</a> #{@bid.estimated_hours} Marbles. Please leave feedback for the exchange: <a href='#{req_path(@req)}'>#{@req.name}</a>. This is an automated message"
         fbk_note.sender = @bid.person
         fbk_note.recipient = @req.person
         

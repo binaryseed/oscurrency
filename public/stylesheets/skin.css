@@ -627,7 +627,7 @@ h2
 {
     color:#195bac;
     text-transform:none;
-    text-align:center;
+    text-align:left;
 }
 h2.blue
 {
@@ -871,7 +871,6 @@ body.person li.req div.profile-image
 }
 body.person .col1 h2
 {
-   color:black;
 }
 
 
@@ -979,3 +978,7 @@ body.login img.flow
 
 
 
+li.req .profile-image .name
+{
+    font-size:12px;
+}

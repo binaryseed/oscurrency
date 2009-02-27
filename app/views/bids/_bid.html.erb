@@ -9,12 +9,21 @@
 	    <%= image_tag "icons/reply.gif", :class => "icon", :alt => "Bid" %>
 	<% end %>
 	
+	<p class='name'><%= person_link bid.person %></p>
 
 
   </div>
 
   <% unless bid.confirmed? %><p>Marble bid: <%= h bid.estimated_hours %> <span class="meta">Expires <%= relative_time_ago_in_words(bid.expiration_date) %></span></p><% end %>
-  <% if bid.confirmed? %><p>Completed for <%= h bid.estimated_hours %> Marbles by <%= person_link bid.person %></p><% end %>
+  <% if bid.confirmed? %>
+
+		<% if bid.req.offer? %>
+		  Confirmed completed by <%= person_link bid.person %> for <%= h bid.estimated_hours %> Marbles
+		<% else %>
+		  Confirmed completed by <%= person_link bid.req.person %> for <%= h bid.estimated_hours %> Marbles
+		<% end %>
+
+ <% end %>
 
   <div class="col_content">
   <p>

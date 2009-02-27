@@ -27,7 +27,6 @@
                 message_path(message, :anchor => message_anchor(message)) %>
   </p>
   <p class="meta">
-    <%= link_to "Read", message %> |
     <%= link_to "Reply", reply_message_path(message) %> |
     <% unless message.trashed?(current_person) -%>
       <%= link_to("Trash", message, :method => :delete) %>

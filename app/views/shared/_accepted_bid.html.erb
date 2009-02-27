@@ -3,7 +3,7 @@
 #            show comfirm complete for 'bidder' only after 'offerer' is COMMITTED
 #                                                    until status is
 %>
-
+<%= accepted_bid.status_id %>
 <% if current_person?(accepted_bid.req.person) && accepted_bid.notaccepted? -%>
   <% form_for :bid, :url => req_bid_path(accepted_bid.req, accepted_bid), :html => {:method => :put, :class => :center} do |f| %>
     <%= f.hidden_field :status_id, :value => Bid::ACCEPTED %>

@@ -4,6 +4,7 @@
     <%= image_link req.person, :image => :thumbnail if params[:controller]!="people" %>
 	<% arrow_image = (req.offer? or req.exchange?) ? "icons/arrow_left.gif" : "icons/arrow_right.gif" %>
     <%= image_tag arrow_image, :class => "icon", :alt => "Request" %>
+	<% if params[:controller] != "people" %><p class='name'><%= person_link req.person %></p><% end %>
   </div>
   <p>
 	
@@ -21,7 +22,8 @@
 	<% if req.active %>
 		(<%= h req.estimated_hours %> Marbles)
 	    <span class="meta">Due: <%= relative_time_ago_in_words(req.due_date) %></span>
-	<% else %>		
+	<% else %>	
+		<span class="meta">Not active</span>
 	<% end %>
 	
 
@@ -54,7 +56,7 @@
     <%= time_ago_in_words(req.created_at) %> ago
 
 
-    <% if current_person?(req.person) && !req.active && !req.exchange?-%>
+    <% if current_person?(req.person) && !req.active && !req.exchange? -%>
      | 
 		  <% form_for :req,  :url => req_path(req), :html => {:id => "active_form", :method => :put} do |f| %>
 		    <%= f.hidden_field :active, :value => 1 %>

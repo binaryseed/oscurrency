@@ -53,7 +53,8 @@ class Bid < ActiveRecord::Base
   end
 
   def completed?
-    completed_at != nil
+    # completed_at != nil
+    status_id >= COMPLETED
   end
 
   def commitment?

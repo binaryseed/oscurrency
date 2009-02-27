@@ -52,6 +52,10 @@ class ReqsController < ApplicationController
   # POST /reqs.xml
   def create
     @req = Req.new(params[:req])
+    
+    if @req.due_date == nil
+      @req.due_date = Time.now + 1.month
+    end
 
     @req.due_date += 1.day - 1.second # make due date at end of day
     @req.person_id = current_person.id
@@ -78,7 +82,8 @@ class ReqsController < ApplicationController
 
     respond_to do |format|
       if @req.update_attributes(params[:req])
-        flash[:notice] = 'Request was successfully updated.'
+        flash[:notice] = 'Offer was successfully updated.' if @req.offer?
+        flash[:notice] = 'Request was successfully updated.' if !@req.offer?
         format.html { redirect_to(@req) }
         format.xml  { head :ok }
       else

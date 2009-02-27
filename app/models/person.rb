@@ -259,7 +259,8 @@ class Person < ActiveRecord::Base
   def has_unread_messages?
     Message.count(:all,
                   :conditions => [%(recipient_id = ? AND
-                                    recipient_read_at IS NULL), id]) > 0
+                                    recipient_read_at IS NULL AND
+                                    recipient_deleted_at IS NULL ), id]) > 0
   end
 
   def formatted_categories
