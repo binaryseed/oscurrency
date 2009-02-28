@@ -19,7 +19,14 @@ class CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @category = Category.find(params[:id])
-    @reqs = @category.reqs
+    
+    req_ids = []
+    Category.find_all_by_parent_id(params[:id]).each { |c|
+      c.reqs.each {|r| req_ids.concat [r.id] }
+    }
+    @category.reqs.each {|r| req_ids.concat [r.id] }
+    
+    @reqs = Req.find(req_ids)
 
     respond_to do |format|
       format.html # show.html.erb
