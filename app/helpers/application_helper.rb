@@ -40,7 +40,6 @@ module ApplicationHelper
       login =    menu_element("home", home_path)
       signup =    menu_element("signup", signup_path)
       links = [login]
-      links.push(categories)
       if !global_prefs.questions.blank?
         links.push(menu_element("Community Currency Primer", questions_url))
       end
@@ -59,6 +58,7 @@ module ApplicationHelper
       if !global_prefs.contact.blank?
         links.push(menu_element("Contact", contact_url))
       end
+      links.push(categories)
       links.push(signup)
     end
 

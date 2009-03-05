@@ -33,7 +33,7 @@
           <%- end -%>
         <% else -%>
           <%- if logged_in? -%>
-          <li>
+            <li>
 	          <%= link_to image_tag("icons/edit.gif"), edit_person_path(@person) %>
 	          <%= link_to "Edit", edit_person_path(@person) %> your profile
 			</li>

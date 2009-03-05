@@ -32,6 +32,7 @@ class PeopleController < ApplicationController
   end
   
   def new
+    redirect_to home_url and return if logged_in? 
     @body = "register single-col"
     @body = @body + " yui-skin-sam"
     @person = Person.new

@@ -122,7 +122,7 @@ class BidsController < ApplicationController
               @bid.completed_at = Time.now
               @bid.status_id = Bid::COMPLETED
               if @bid.save!
-                flash[:notice] = 'Work marked completed.'
+                flash[:notice] = "Work marked completed."
                 bid_note = Message.new()
                 bid_note.subject = "BID: Work completed - " + @req.name # XXX make sure length does not exceed 40 chars
                 bid_note.content = "Work completed for <a href='#{req_path(@req)}'>#{@req.name}</a>. Please confirm this transaction! This is an automated message"
@@ -238,12 +238,14 @@ class BidsController < ApplicationController
     
     if @req.offer?
       Account.transfer(@bid.person.account,@req.person.account,@bid.estimated_hours,@req)
+      if current_person?(@req.person) then verb = "earned" else verb = "exchanged" end
     else
       Account.transfer(@req.person.account,@bid.person.account,@bid.estimated_hours,@req)
+      if current_person?(@bid.person) then verb = "earned" else verb = "exchanged" end
     end
 
     if @bid.save!
-      flash[:notice] = 'Work confirmed complete.'
+      flash[:success] = "Work confirmed complete.<script type='text/javascript'>fb_marbles('#{verb} #{@bid.estimated_hours.to_i} Marbles')</script>"
       
       fbk_note = Message.new()
       fbk_note.subject = "BID: Completed - Please leave Feedback for #{@req.name}"

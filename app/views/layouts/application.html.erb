@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <%- if global_prefs.app_name.blank? -%>
@@ -10,12 +10,19 @@
     <%- end -%>
     <%= stylesheet_link_tag "default" %>
     <%= javascript_include_tag :defaults %>
+	<%= javascript_include_tag 'fbconnect' %>
     <%= calendar_date_select_includes :default %>
     <%= stylesheet_link_tag 'calendar/blue/style' %>
     <%= yield :jquery_support %>
     <%= yield :head %>    
   </head>
   <body class="<%= @body %>">
+
+    <% if logged_in? %>
+		<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+		<script type="text/javascript">fb_setup()</script>
+    <% end %> 
+
     <div id="header-wrap">
       <div id="header">
         <ul id="nav">
@@ -26,27 +33,22 @@
         
           <p class="welcome">
             <%- if logged_in? -%>
+				
+              Hello, <span class="name"><%= h current_person.name %></span>! 
+               <%= link_to "logout", logout_path %>
+	              <%- if current_person.admin? -%>
+	                <%- if admin_view? -%>
+	                  | <%= link_to("Standard", home_path) %>
+	                <%- else -%>
+	                  | <%= link_to("Admin", admin_preferences_path) %>
+	                <%- end -%>
+	              <%- end -%>
 
-              Hello, <span class="name"><%= h current_person.name %></span>!
-              (<%= link_to "Sign out", logout_path %>)
-              <%- if current_person.admin? -%>
-                <br />
-                <%- if admin_view? -%>
-                  <%= link_to("Standard view", home_path) %>
-                <%- else -%>
-                  <%= link_to("Admin view", admin_preferences_path) %>
-                <%- end -%>
-              <%- end -%>
-
+			  
+			    <span id="fb_status">
+				</span>
+			
             <%- else -%>
-
-              <!-- <%= link_to "Sign in", login_path %> or
-              <%= link_to "Sign up", signup_path %>
-              <%- if global_prefs.can_send_email? -%>
-              <br />
-              <%= link_to "I forgot my password",
-                           new_password_reminder_path %>
-              <%- end -%>     -->
          
             <%- end -%>
           </p>
@@ -78,6 +80,7 @@
       <%- end -%> 
 
     </div>
+
     <%= global_prefs.analytics %>
   </body>
 </html>

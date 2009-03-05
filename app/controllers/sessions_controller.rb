@@ -136,4 +136,25 @@ class SessionsController < ApplicationController
       redirect_back_or_default(login_url)
     end
   end
+  
+  def connect
+   # params[:fname] is a trigger by which we identify the right request
+   if (params[:fname]=='_opener') 
+
+     jsoned = params[:session]
+     data = ActiveSupport::JSON.decode(jsoned) # data is sent in JSON, we need to parse it
+     session[:connect] = data
+     
+     
+     if(!self.current_person.facebook_id)
+       self.current_person.facebook_id = data['uid']
+       self.current_person.save!
+     end
+
+   end
+   render :layout => false
+   # render the cross-domain communication channel
+  end
+  
+  
 end

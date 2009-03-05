@@ -161,9 +161,9 @@ p.welcome {
   position: absolute;
   right: 0px;
   text-align: right;
-  top: 58px;
+  top: 5px;
 }
-p.welcome br { display:none; }
+/*p.welcome br { display:none; }*/
 
 
 
@@ -946,6 +946,7 @@ body.login h1 .name
 }
 body.login h2
 {
+    text-align:center;
     background:white;
     border:1px;
     margin-top:38px;

@@ -19,7 +19,6 @@
 <!-- 
 <span id="italic">italic</span> <span id="bold">bold</span> <br />
 <textarea id="ta" rows="5" cols="40"></textarea> 
--->
 
 
 
@@ -51,6 +50,7 @@
 	Event.observe("bold","click", function(e){ wrap("**","ta") } )
 
 </script>
+-->
 
 
 <h2>login</h2>
@@ -62,7 +62,6 @@
     <%= text_field_tag 'email', params[:email],
                                 :maxlength => Person::MAX_EMAIL  %>
   </div>
-  <%= set_focus_to "email" %>
 
   <div class="form_row">
     <label for="password">Password</label>

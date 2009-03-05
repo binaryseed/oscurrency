@@ -38,4 +38,3 @@ config/ultrasphinx/*.conf
 configure*.sh
 db/backup
 db/backup/*
-public/javascripts/fbconnect.js

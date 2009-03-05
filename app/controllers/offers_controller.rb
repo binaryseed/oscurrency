@@ -27,7 +27,7 @@ class OffersController < ReqsController
 
     respond_to do |format|
       if @req.save
-        flash[:notice] = 'Request was successfully created.'
+        flash[:success] = "Offer was successfully created. <script type='text/javascript'>fb_offer()</script> "
         format.html { redirect_to(@req) }
         format.xml  { render :xml => @req, :status => :created, :location => @req }
       else

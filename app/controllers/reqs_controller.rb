@@ -62,7 +62,7 @@ class ReqsController < ApplicationController
 
     respond_to do |format|
       if @req.save
-        flash[:notice] = 'Request was successfully created.'
+        flash[:success] = "Request was successfully created. <script type='text/javascript'>fb_request()</script> "
         format.html { redirect_to(@req) }
         format.xml  { render :xml => @req, :status => :created, :location => @req }
       else
