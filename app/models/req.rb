@@ -25,8 +25,6 @@ class Req < ActiveRecord::Base
   belongs_to :person
   has_many :bids, :order => 'created_at DESC'
 
-  attr_readonly :description
-
   attr_protected :person_id, :created_at, :updated_at
   validates_presence_of :name, :due_date
   after_create :log_activity
