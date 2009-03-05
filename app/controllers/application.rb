@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   
   before_filter :create_page_view, :require_activation, :tracker_vars,
                 :admin_warning, :alert_messages
-
+                
   ActiveScaffold.set_defaults do |config|
     config.ignore_columns.add [ :created_at, :updated_at ]
   end

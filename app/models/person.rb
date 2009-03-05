@@ -267,6 +267,10 @@ class Person < ActiveRecord::Base
     categories.collect { |cat| cat.long_name + "<br>"}.to_s.chop.chop.chop.chop
   end
 
+  def listed_categories
+    categories.collect { |cat| cat.long_name + ", "}.to_s.chop.chop
+  end
+
   def create_address
     address = Address.new( :name => 'personal' )
     address.zipcode_plus_4 = '78701'
