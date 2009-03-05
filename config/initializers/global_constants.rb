@@ -15,7 +15,7 @@ SMALL_TEXT_LENGTH = 300
 # The number of raster colums.
 N_COLUMNS = 4
 # The number of raster results per page.
-RASTER_PER_PAGE = 3 * N_COLUMNS
+RASTER_PER_PAGE = 4 * N_COLUMNS
 
 # Demo user's id
 # The admin must create a demo user in demo mode with id = 2.
