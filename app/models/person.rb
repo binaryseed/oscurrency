@@ -514,12 +514,11 @@ class Person < ActiveRecord::Base
       end
       
       # Return the conditions for a user to be 'mostly' active.
+      # (last_logged_in_at IS NOT NULL AND last_logged_in_at >= ?)
       def conditions_for_mostly_active
         [%(deactivated = ? AND 
-           (email_verified IS NULL OR email_verified = ?) AND
-           (last_logged_in_at IS NOT NULL AND
-            last_logged_in_at >= ?)),
-         false, true, TIME_AGO_FOR_MOSTLY_ACTIVE]
+           (email_verified IS NULL OR email_verified = ?) ),
+         false, true]
       end
     end
 end

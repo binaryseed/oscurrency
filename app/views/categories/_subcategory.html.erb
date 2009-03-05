@@ -1,5 +1,5 @@
 <li>
-<%= link_to h(subcategory.name), subcategory %> <%= "(#{subcategory.num_requests})" unless subcategory.num_requests==0 %>
+<%= link_to h(subcategory.name), subcategory %> <span class="meta"><%= "(#{subcategory.num_requests})" unless subcategory.num_requests==0 %></span>
 <% if !subcategory.children.empty? %>
   <ul><%= render :partial => 'subcategory', :collection => subcategory.children %></ul>
 <% end %>
