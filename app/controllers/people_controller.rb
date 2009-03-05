@@ -57,12 +57,12 @@ class PeopleController < ApplicationController
         end
         if global_prefs.email_verifications?
           @person.email_verifications.create
-          flash[:notice] = %(Thanks for signing up! Check your email
+          flash[:success] = %(Thanks for signing up! Check your email
                              to activate your account.)
           format.html { redirect_to(home_url) }
         else
           self.current_person = @person
-          flash[:notice] = "Thanks for signing up!"
+          flash[:success] = "Thanks for signing up!"
           format.html { redirect_back_or_default(home_url) }
         end
       else

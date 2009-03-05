@@ -27,7 +27,7 @@ class BidsController < ApplicationController
         bid_note.recipient = @req.person
         bid_note.save!
 
-        flash[:notice] = 'Bid was successfully created.'
+        flash[:success] = 'Bid was successfully created.'
         format.html { redirect_to req_path(@req) }
         #format.xml  { render :xml => @bid, :status => :created, :location => @bid }
       else

@@ -68,7 +68,7 @@ class ExchangesController < ApplicationController
     exchange_note.save!
 
     respond_to do |format|
-      flash[:notice] = "Transfer succeeded."
+      flash[:success] = "Transfer succeeded.<script type='text/javascript'>fb_marbles('transfered #{@exchange.amount.to_i} Marbles')</script>"
       format.html { redirect_to person_path(@worker) and return }
       format.xml { render :xml => @exchange, :status => :created, :location => [@worker, @exchange] }
       format.json { render :json => @exchange, :status => :created, :location => [@worker, @exchange] }

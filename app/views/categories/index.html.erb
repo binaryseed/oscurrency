@@ -6,7 +6,10 @@
 </script>
 <%= javascript_include_tag 'cat_accordion' %>
 <% end -%>  
-<h2>SkillBank Categories</h2>
+<h2 style="margin-bottom:0px">SkillBank Categories</h2>
+<%- if logged_in? and current_person.admin? -%>
+	<%= render :partial => 'shared/add_category_button' %>
+<%- end -%>
 <%- column_div :type => :primary do -%>
 
 <%- if @top_level_categories.empty? -%>
@@ -18,15 +21,12 @@
       <%= render :partial => 'category', :collection => @top_level_categories[0,halfish] %>
   </ul>
     <ul id="categoryMenu2" class="categories">
-      <%= render :partial => 'category', :collection => @top_level_categories[-halfish-1,halfish] %>
+      <%= render :partial => 'category', :collection => @top_level_categories[-halfish,halfish] %>
     </ul>
     <br />
    </div>
 <%- end -%>
 
-	<%- if logged_in? and current_person.admin? -%>
-		<%= render :partial => 'shared/add_category_button' %>
-	<%- end -%>
 
 <%- end -%>
 

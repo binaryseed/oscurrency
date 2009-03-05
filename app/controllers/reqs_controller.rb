@@ -82,8 +82,8 @@ class ReqsController < ApplicationController
 
     respond_to do |format|
       if @req.update_attributes(params[:req])
-        flash[:notice] = 'Offer was successfully updated.' if @req.offer?
-        flash[:notice] = 'Request was successfully updated.' if !@req.offer?
+        flash[:success] = 'Offer was successfully updated.' if @req.offer?
+        flash[:success] = 'Request was successfully updated.' if !@req.offer?
         format.html { redirect_to(@req) }
         format.xml  { head :ok }
       else

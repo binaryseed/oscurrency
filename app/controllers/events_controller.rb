@@ -50,7 +50,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        flash[:notice] = 'Event was successfully created.'
+        flash[:success] = 'Event was successfully created.'
         format.html { redirect_to(@event) }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else

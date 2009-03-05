@@ -6,7 +6,7 @@
       <li><%= link_to 'General', category %></li>
       <br>
     <% else -%>
-      <li><%= link_to 'General', category %></li>
+      <li><%= link_to 'General', category %> <%= "(#{category.num_requests})" unless category.num_requests==0 %></li>
       <%= render :partial => 'subcategory', :collection => category.children %>
     <% end -%>
     </ul>

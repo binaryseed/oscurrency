@@ -19,14 +19,8 @@ class CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @category = Category.find(params[:id])
-    
-    req_ids = []
-    Category.find_all_by_parent_id(params[:id]).each { |c|
-      c.reqs.each {|r| req_ids.concat [r.id] }
-    }
-    @category.reqs.each {|r| req_ids.concat [r.id] }
-    
-    @reqs = Req.find(req_ids)
+        
+    @reqs = @category.all_requests
 
     respond_to do |format|
       format.html # show.html.erb
@@ -59,7 +53,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        flash[:notice] = 'Category was successfully created.'
+        flash[:success] = 'Category was successfully created.'
         format.html { redirect_to(@category) }
         format.xml  { render :xml => @category, :status => :created, :location => @category }
       else

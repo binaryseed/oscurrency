@@ -19,6 +19,21 @@ class Category < ActiveRecord::Base
   has_and_belongs_to_many :people
   acts_as_tree
 
+  def all_requests
+    req_ids = []
+    
+    Category.find_all_by_parent_id(self.id).each { |c|
+      c.reqs.each {|r| req_ids.concat [r.id] if r.active }
+    }
+    reqs.each {|r| req_ids.concat [r.id] if r.active }
+
+    Req.find(req_ids)
+  end
+  
+  def num_requests
+    all_requests.length
+  end
+
   def ancestors_name
     if parent
       parent.ancestors_name + parent.name + ':'
