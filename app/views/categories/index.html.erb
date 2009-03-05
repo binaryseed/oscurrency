@@ -18,14 +18,15 @@
       <%= render :partial => 'category', :collection => @top_level_categories[0,halfish] %>
   </ul>
     <ul id="categoryMenu2" class="categories">
-      <%= render :partial => 'category', :collection => @top_level_categories[-halfish,halfish] %>
+      <%= render :partial => 'category', :collection => @top_level_categories[-halfish-1,halfish] %>
     </ul>
     <br />
    </div>
 <%- end -%>
 
-<%= # render :partial => 'shared/add_category_button' 
-%>
+	<%- if logged_in? and current_person.admin? -%>
+		<%= render :partial => 'shared/add_category_button' %>
+	<%- end -%>
 
 <%- end -%>
 
