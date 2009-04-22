@@ -27,7 +27,7 @@ class ForumPost < Post
   validates_presence_of :body, :person
   validates_length_of :body, :maximum => 5000
   
-  after_create :log_activity
+  # after_create :log_activity
     
   private
   

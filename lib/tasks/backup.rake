@@ -14,13 +14,13 @@ namespace :db do
     sh "mysqldump -u #{db_config['username']} #{pass} #{db_config['database']} -Q --add-drop-table -O add-locks=FALSE -O lock-tables=FALSE  | gzip -c > #{backup_file}"     
     dir = Dir.new(backup_base)
     all_backups = dir.entries[2..-1].sort.reverse
-    puts "Created backup: #{backup_file}"
+    # puts "Created backup: #{backup_file}"
     max_backups = (ENV["MAX"] || 20).to_i
     unwanted_backups = all_backups[max_backups..-1] || []
     for unwanted_backup in unwanted_backups
       FileUtils.rm_rf(File.join(backup_base, unwanted_backup))
-      puts "deleted #{unwanted_backup}" 
+      # puts "deleted #{unwanted_backup}" 
     end
-    puts "Deleted #{unwanted_backups.length} backups, #{all_backups.length - unwanted_backups.length} backups available" 
+    # puts "Deleted #{unwanted_backups.length} backups, #{all_backups.length - unwanted_backups.length} backups available" 
   end
 end

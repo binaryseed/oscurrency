@@ -435,8 +435,11 @@ ul.categories li.selected a
 }
 ul.categories a.categoryMenuItem, ul.categories li.selected a.selected
 {
-    text-decoration:none;
     color:#777;
+}
+a.categoryMenuItem:hover
+{
+  text-decoration:underline;
 }
 ul.categories li ul li
 {
@@ -655,20 +658,19 @@ a.meta, .meta a
 {
 }
 
-
+.categorycol
+{
+  padding-top:20px;
+}
 #categoryMenu
 {
-    position:absolute;
-    top:20px;
-    left:10px;
-    width:390px;
+  float:left;
+  width:410px;
 }
 #categoryMenu2
 {
-    position:absolute;
-    top:20px;
-    width:390px;
-    left:420px;
+  float:left;
+    width:410px;
 }
 
 .blog h3, .blog h3 a, .blog h3 a:visited
@@ -924,11 +926,6 @@ body.home blockquote p
 
 
 
-body.login .col1
-{
-    width:auto;
-    float:none;
-}
 body.login h1
 {
     font-size:23px;

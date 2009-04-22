@@ -1,12 +1,14 @@
 <li>
-  <a class="categoryMenuItem" href="#<%= category_counter + 1  %>" title="" name="<%= category_counter + 1 %>"><%= category.name %> <span class='meta'><%= "(#{category.num_requests})" unless category.num_requests==0 %></span></a> 
+  <%= link_to category.name, category, {:class => "categoryMenuItem" } %>
+  <!-- <a class="categoryMenuItem" href="#<%= category_counter + 1  %>" title="" name="<%= category_counter + 1 %>"> -->
+    <!-- <%= category.name %> --> <span class='meta'><%= "(#{category.num_requests})" unless category.num_requests==0 %></span>
+  <!-- </a>  -->
   <div>
     <ul>
     <% if category.children.empty? -%>
-      <li><%= link_to 'General', category %> <span class="meta"><%= "(#{category.num_requests})" unless category.num_requests==0 %></span></li>
-      <br>
+      <!-- <li><%= link_to 'General', category %> <span class="meta"><%= "(#{category.num_requests})" unless category.num_requests==0 %></span></li> -->
     <% else -%>
-      <li><%= link_to 'General', category %> <span class="meta"><%= "(#{category.num_requests})" unless category.num_requests==0 %></span></li>
+      <!-- <li><%= link_to 'General', category %> <span class="meta"><%= "(#{category.num_requests})" unless category.num_requests==0 %></span></li> -->
       <%= render :partial => 'subcategory', :collection => category.children %>
     <% end -%>
     </ul>
