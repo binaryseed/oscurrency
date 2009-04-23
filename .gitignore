@@ -20,8 +20,9 @@ db/schema.sql
 db/*.sqlite3*
 config/database.yml
 public/photos/*
-public/robots.txt
+public/robots*
 public/thumbnails
+public/images/cec_header_background.jpg
 uuid.state
 nbproject*
 index/*
