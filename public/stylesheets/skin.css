@@ -983,7 +983,7 @@ body.login #switcher
     left:157px;
     width:225px; 
     height:220px;
-    z-index:10;
+    z-index:12;
     line-height:1.7em;
     font-size:20px;
 }
@@ -1009,10 +1009,13 @@ body.login #areas
 body.login #areas .area
 {
   position:absolute;
+  z-index:10;
+  background:url(/images/transparent.gif);
 }
 body.login #areas .area:hover
 {
   background:white;
+  filter: alpha(opacity = 40);
   opacity:.4;
 }
 

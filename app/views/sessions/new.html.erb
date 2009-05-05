@@ -6,7 +6,7 @@
 <div id="flowcircle">
 	
 	<div id="areas">
-	  <div class='area' id='1' style='top:96px;left:281px;width:82px;height:60px;'></div>
+	  <div class='area' id='1' style='top:96px;left:281px;width:82px;height:60px;'> </div>
     <div class='area' id='2' style='top:125px;left:364px;width:82px;height:60px;'></div>
     <div class='area' id='3' style='top:190px;left:373px;width:148px;height:108px;'></div>
     <div class='area' id='4' style='top:327px;left:417px;width:71px;height:73px;'></div>
@@ -79,32 +79,17 @@
 <script type="text/javascript">
 
 jQuery(function(){
-    
-  // $("#areas .area").hover(
-  //   function(){
-  //     showid = "step"+$(this).attr("id")
-  //     $("#switcher div").hide()
-  //     $("#switcher ."+showid).fadeIn()
-  //   },
-  //   function(){
-  //     $("#switcher div").not(".login").hide()
-  //     // $("#switcher .login").fadeIn(3000)
-  //   }
-  // )
-  // $("#areas .area").mouseleave(function(){
-  //   $("#switcher .login").fadeIn(1500)
-  // })
+      
   
-  
-  $("#areas .area").hoverIntent(
+  jQuery("#areas .area").hoverIntent(
     function(){
-      showid = "step"+$(this).attr("id")
-      $("#switcher div").hide()
-      $("#switcher ."+showid).fadeIn()
+      showid = "step"+jQuery(this).attr("id")
+      jQuery("#switcher div").hide()
+      jQuery("#switcher ."+showid).fadeIn()
     },
     function(){
-      $("#switcher div").not(".login").hide()
-      $("#switcher .login").fadeIn(3000)
+      jQuery("#switcher div").not(".login").hide()
+      jQuery("#switcher .login").fadeIn(3000)
     }
   )
   
@@ -116,41 +101,7 @@ jQuery(function(){
 
 
 
-<!-- 
-<span id="italic">italic</span> <span id="bold">bold</span> <br />
-<textarea id="ta" rows="5" cols="40"></textarea> 
 
-
-
-<script type="text/javascript">
-
-	setSelectionRange = function(ta, s, e) 
-	{	
-		if (ta.setSelectionRange) {
-			ta.focus(); ta.setSelectionRange(s, e);
-		}
-		else if (ta.createTextRange) {
-			rng = ta.createTextRange(); rng.collapse(true);
-			rng.moveEnd('character', e); rng.moveStart('character', s); rng.select();
-		}
-	}
-	setPosition = function(el, pos) 
-	{
-		setSelectionRange(el, pos, pos);
-	}
-	wrap = function(w,el)
-	{
-		t = document.getElementById(el); s = t.selectionStart; e = t.selectionEnd
-		if(s==e) return
-		t.value = t.value.substring(0,s)+w+t.value.substring(s,e)+w+t.value.substring(e,t.value.length)
-		setPosition(t,e+w.length*2)
-	}
-
-	Event.observe("italic","click", function(e){ wrap("*","ta") } )
-	Event.observe("bold","click", function(e){ wrap("**","ta") } )
-
-</script>
--->
 
 
 
