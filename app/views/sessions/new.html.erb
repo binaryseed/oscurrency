@@ -3,15 +3,114 @@
 
 <%- column_div :type => :primary do -%>
 
-<p style="text-align:center">
+<div id="flowcircle">
+	
+	<div id="areas">
+	  <div class='area' id='1' style='top:96px;left:281px;width:82px;height:60px;'></div>
+    <div class='area' id='2' style='top:125px;left:364px;width:82px;height:60px;'></div>
+    <div class='area' id='3' style='top:190px;left:373px;width:148px;height:108px;'></div>
+    <div class='area' id='4' style='top:327px;left:417px;width:71px;height:73px;'></div>
+    <div class='area' id='5' style='top:410px;left:378px;width:68px;height:79px;'></div>
+    <div class='area' id='6' style='top:434px;left:211px;width:146px;height:125px;'></div>
+    <div class='area' id='7' style='top:426px;left:98px;width:79px;height:79px;'></div>
+    <div class='area' id='8' style='top:367px;left:39px;width:78px;height:61px;'></div>
+    <div class='area' id='9' style='top:222px;left:10px;width:136px;height:118px;'></div>
+    <div class='area' id='10a' style='top:133px;left:59px;width:91px;height:81px;'></div>
+    <div class='area' id='10b' style='top:89px;left:118px;width:91px;height:81px;'></div>
+    <div class='area' id='10c' style='top:65px;left:196px;width:66px;height:81px;'></div>
+  </div>
+	
+	<div id="switcher">
+	  
+	  <div class="login">
+  		<a href="/questions">1) Learn</a><br />
+  		<a href="<%= signup_path %>">2) Signup</a><br />
+  		<a href="#" style="text-decoration:none;cursor:text;">3) Exchange!</a>
+    </div> 
+    
+    <div class="step1" style="padding-top:59px">
+      Axel joins the CEC and posts a request for dog walking.
+    </div>
+    <div class="step2" style="padding-top:84px">
+      Beth sees the request and submits a bid.
+    </div>
+    <div class="step3" style="padding-top:53px">
+      Beth walks Axel's dog. Axel commits 15 Marbles to the Circle, and Beth recieves 15.
+    </div>
+    <div class="step4" style="padding-top:36px">
+      Chris offers up a basket of veggies from his garden at a suggested price of 8 Marbles.
+    </div>
+    <div class="step5" style="padding-top:1px">
+      Beth has heard that Chris' veggies are top notch, and offers to exchange 10 Marbles for the veggies by posting a bid.
+    </div>
+    <div class="step6" style="padding-top:1px">
+      The veggies were great. Beth confirms the exchange is complete, thus committing 10 Marbles to the Circle, which then contributes 10 to Chris.
+    </div>
+    <div class="step7" style="padding-top:62px">
+      Chris is riding his bike around, hits a rock and gets a flat tire.
+    </div>
+    <div class="step8" style="padding-top:20px">
+      Axel happens to drive by and see him, and offers him a ride to the bike shop where Chris can get his tire fixed.
+    </div>
+    <div class="step9" style="padding-top:35px">
+      To thank him, Chris transfers 7 Marbles to Axel for helping him out when he needed it.
+    </div>
+    <div class="step10a" style="padding-top:65px">
+      Chris has exchanged 17 Marbles, and has a balance of 3.
+    </div>
+    <div class="step10b" style="padding-top:65px">
+      Beth has exchanged 25 Marbles, and has a balance of 5.
+    </div>
+    <div class="step10c" style="padding-top:65px">
+      Axel has exchanged 22 Marbles, and has a balance of -8.
+    </div>
+    
+  </div>
+  
 	<img class="flow" src="images/flowcircle.png" />
-	<div id='center'>
-		<a href="/questions">1) Learn</a><br />
-		<a href="<%= signup_path %>">2) Signup</a><br />
-		<a href="#" style="text-decoration:none;cursor:text;">3) Exchange!</a>
-	</div>
-</p>
+ 
+</div>
 
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<%= javascript_include_tag 'hoverIntent' %>
+
+
+<script type="text/javascript">
+
+jQuery(function(){
+    
+  // $("#areas .area").hover(
+  //   function(){
+  //     showid = "step"+$(this).attr("id")
+  //     $("#switcher div").hide()
+  //     $("#switcher ."+showid).fadeIn()
+  //   },
+  //   function(){
+  //     $("#switcher div").not(".login").hide()
+  //     // $("#switcher .login").fadeIn(3000)
+  //   }
+  // )
+  // $("#areas .area").mouseleave(function(){
+  //   $("#switcher .login").fadeIn(1500)
+  // })
+  
+  
+  $("#areas .area").hoverIntent(
+    function(){
+      showid = "step"+$(this).attr("id")
+      $("#switcher div").hide()
+      $("#switcher ."+showid).fadeIn()
+    },
+    function(){
+      $("#switcher div").not(".login").hide()
+      $("#switcher .login").fadeIn(3000)
+    }
+  )
+  
+})
+ 
+</script>
 
 
 
