@@ -201,6 +201,7 @@ p.welcome {
 }
 .list.small li {
   display: block;
+  width:248px;
 }
 .list.small p {
     padding-left:5px;
@@ -612,6 +613,7 @@ clear:both;content:'.';display:block;visibility:hidden;height:0
 .col1 .list li
 {
     border:0px;
+    width:540px;
 }
 
 
@@ -960,6 +962,7 @@ body.login hr
 }
 body.login #center
 {
+display:none;
     text-align:center;
     position:relative;
     z-index:5;
@@ -967,14 +970,51 @@ body.login #center
     line-height:1.7em;
     font-size:20px;
 }
-body.login img.flow
+body.login #flowcircle
 {
-    z-index:-5;
-    text-align:center;
+    position:relative;
+    height:650px;
 }
-
-
-
+body.login #switcher
+{
+    position:absolute;
+    text-align:center;
+    top:197px;
+    left:157px;
+    width:225px; 
+    height:220px;
+    z-index:10;
+    line-height:1.7em;
+    font-size:20px;
+}
+body.login #switcher div
+{
+  display:none;
+}
+body.login #switcher div.login
+{
+  display:block;
+  margin-top:56px;
+}
+body.login #switcher div
+{
+  position:absolute;
+  width:225px; 
+}
+body.login #areas
+{
+  position:absolute;
+  z-index:7;
+}
+body.login #areas .area
+{
+  position:absolute;
+}
+body.login #areas .area:hover
+{
+  background:white;
+  opacity:.4;
+}
 
 li.req .profile-image .name
 {
