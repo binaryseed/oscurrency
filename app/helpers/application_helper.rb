@@ -14,30 +14,33 @@ module ApplicationHelper
     end
     # resources = menu_element("Resources", "http://docs.insoshi.com/")
     if logged_in? and not admin_view?
+      blog     = menu_element("home",     blog_path(1))
       profile  = menu_element("profile",  person_path(current_person))
       offers = menu_element("Offers", offers_path)
       requests = menu_element("Requests", reqs_path)
       messages = menu_element("inbox", messages_path)
-      # blog     = menu_element("Blog",     blog_path(admin.blog))
       # photos   = menu_element("Photos",   photos_path)
 #      contacts = menu_element("Contacts",
 #                              person_connections_path(current_person))
 #      links = [home, profile, contacts, messages, blog, people, forum]
       events   = menu_element("events", events_path)
-      links = [ profile, people, categories, offers, requests, messages, forum, events]
+      links = [ blog,profile, people, categories, offers, requests, messages, forum, events]
 
       
     elsif logged_in? and admin_view?
       home =    menu_element("Home", home_path)
+      blog     = menu_element("blog",     blog_path(1))
       spam = menu_element("Spam", admin_broadcast_emails_path)
       people =  menu_element("People", admin_people_path)
       forums =  menu_element(inflect("forum", Forum.count),
                              admin_forums_path)
       preferences = menu_element("Prefs", admin_preferences_path)
-      links = [home, spam, people, forums, preferences]
+      links = [home, blog, spam, people, forums, preferences]
     else
       #links = [home, people]
       login =    menu_element("home", home_path)
+      blog     = menu_element("blog",     blog_path(1))
+      cat_not_lgedin = menu_element("categories", categories_path)
       signup =    menu_element("signup", signup_path)
       links = [login]
       if !global_prefs.questions.blank?
@@ -58,7 +61,7 @@ module ApplicationHelper
       if !global_prefs.contact.blank?
         links.push(menu_element("Contact", contact_url))
       end
-      links.push(categories)
+      links.push(blog,cat_not_lgedin)
       links.push(signup)
     end
 
