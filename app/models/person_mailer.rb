@@ -19,7 +19,7 @@ class PersonMailer < ActionMailer::Base
   def message_notification(message)
     from         "Columbia Exchange Circle <marbles@#{domain}>"
     recipients   message.recipient.email
-    subject      formatted_subject("Message Recieved")
+    subject      formatted_subject("New Message")
     body         "domain" => server, "message" => message,
                  "preferences_note" => preferences_note(message.recipient)
   end
@@ -48,7 +48,7 @@ class PersonMailer < ActionMailer::Base
   def wall_comment_notification(comment)
     from         "Columbia Exchange Circle <comment@#{domain}>"
     recipients   comment.commented_person.email
-    subject      formatted_subject("Comment Posted")
+    subject      formatted_subject("New Wall Comment")
     body         "domain" => server, "comment" => comment,
                  "url" => person_path(comment.commentable, :anchor => "wall"),
                  "preferences_note" => 
