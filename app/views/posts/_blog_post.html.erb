@@ -6,7 +6,7 @@
                 blog_post_path(@blog, blog_post),
                 :class => "show-follow" %>
   </h3>
-  <%=  blog_post.body %>
+  <%= format blog_post.body %>
   <p class="meta">
     Posted <%= time_ago_in_words(blog_post.created_at) %> ago
     by <%= person_link @blog.person %> | 

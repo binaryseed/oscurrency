@@ -7,7 +7,7 @@
   <%= sanitize @post.title %>
   </h3>
 
-  <%= @post.body %>
+  <%= format @post.body %>
 
   <p class="meta">
   Posted <%= time_ago_in_words(@post.created_at) %> ago
