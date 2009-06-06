@@ -77,6 +77,8 @@ module ActivitiesHelper
       blog = post.blog
       %(#{person_link(person)} made a
         #{post_link("new blog post", blog, post)})
+      %(#{person_link(person)} blogged about
+        #{post_link(blog, post)}.)
     when "Comment"
       parent = activity.item.commentable
       parent_type = parent.class.to_s
