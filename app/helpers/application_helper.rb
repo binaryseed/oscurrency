@@ -14,7 +14,7 @@ module ApplicationHelper
     end
     # resources = menu_element("Resources", "http://docs.insoshi.com/")
     if logged_in? and not admin_view?
-      blog     = menu_element("home",     blog_path(1))
+      blog     = menu_element("blog",     blog_path(1))
       profile  = menu_element("profile",  person_path(current_person))
       offers = menu_element("Offers", offers_path)
       requests = menu_element("Requests", reqs_path)
