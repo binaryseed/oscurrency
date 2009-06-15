@@ -54,7 +54,7 @@ class Person < ActiveRecord::Base
   NUM_WALL_COMMENTS = 10
   NUM_RECENT = 8
   FEED_SIZE = 6
-  TIME_AGO_FOR_MOSTLY_ACTIVE = 2.month.ago
+  TIME_AGO_FOR_MOSTLY_ACTIVE = 4.month.ago
   # These constants should be methods, but I couldn't figure out how to use
   # methods in the has_many associations.  I hope you can do better.
   ACCEPTED_AND_ACTIVE =  [%(status = ? AND
@@ -156,7 +156,7 @@ class Person < ActiveRecord::Base
       paginate(:all, :page => page,
                      :per_page => 10000,
                      :conditions => conditions_for_active,
-                     :order => "created_at DESC")
+                     :order => "created_at ASC")
     end
 
     def find_recent
