@@ -54,7 +54,7 @@ class Person < ActiveRecord::Base
   NUM_WALL_COMMENTS = 10
   NUM_RECENT = 8
   FEED_SIZE = 6
-  TIME_AGO_FOR_MOSTLY_ACTIVE = 1.month.ago
+  TIME_AGO_FOR_MOSTLY_ACTIVE = 2.month.ago
   # These constants should be methods, but I couldn't figure out how to use
   # methods in the has_many associations.  I hope you can do better.
   ACCEPTED_AND_ACTIVE =  [%(status = ? AND
@@ -149,10 +149,16 @@ class Person < ActiveRecord::Base
     end
     
     # Return *all* the active users.
-    def all_active
-      find(:all, :conditions => conditions_for_active)
+    # def all_active
+    #   find(:all, :conditions => conditions_for_active)
+    # end
+    def all_active(page = 1)
+      paginate(:all, :page => page,
+                     :per_page => 10000,
+                     :conditions => conditions_for_active,
+                     :order => "created_at DESC")
     end
-    
+
     def find_recent
       find(:all, :order => "people.created_at DESC",
                  :include => :photos, :limit => NUM_RECENT)
@@ -514,11 +520,12 @@ class Person < ActiveRecord::Base
       end
       
       # Return the conditions for a user to be 'mostly' active.
-      # (last_logged_in_at IS NOT NULL AND last_logged_in_at >= ?)
       def conditions_for_mostly_active
         [%(deactivated = ? AND 
-           (email_verified IS NULL OR email_verified = ?) ),
-         false, true]
+           (email_verified IS NULL OR email_verified = ?) AND
+           (last_logged_in_at IS NOT NULL AND
+            last_logged_in_at >= ?)),
+         false, true, TIME_AGO_FOR_MOSTLY_ACTIVE]
       end
     end
 end

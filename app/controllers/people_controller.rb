@@ -7,7 +7,12 @@ class PeopleController < ApplicationController
   before_filter :setup
   
   def index
-    @people = Person.mostly_active(params[:page])
+    
+    if params[:show]=="all"
+      @people = Person.all_active
+    else
+      @people = Person.mostly_active(params[:page])
+    end
 
     respond_to do |format|
       format.html
